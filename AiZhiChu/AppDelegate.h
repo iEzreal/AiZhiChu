@@ -2,7 +2,7 @@
 //  AppDelegate.h
 //  AiZhiChu
 //
-//  Created by Ezreal on 16/6/17.
+//  Created by Ezreal on 16/6/13.
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
 

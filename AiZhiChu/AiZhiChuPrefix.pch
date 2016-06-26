@@ -1,0 +1,29 @@
+//
+//  AiZhiChuPrefix.pch
+//  AiZhiChu
+//
+//  Created by Ezreal on 16/6/13.
+//  Copyright © 2016年 Ezreal. All rights reserved.
+//
+
+#ifndef AiZhiChuPrefix_pch
+#define AiZhiChuPrefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import "BluetoothManager.h"
+#import "DataConversionUtil.h"
+
+
+#import "ImageTextButton.h"
+
+#import "UIColor+HEX.h"
+#import "UIImage+Color.h"
+
+#import "AZCMacro.h"
+#import <Masonry/Masonry.h>
+
+
+#endif /* AiZhiChuPrefix_pch */

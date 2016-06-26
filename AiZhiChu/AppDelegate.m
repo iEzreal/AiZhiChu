@@ -2,11 +2,13 @@
 //  AppDelegate.m
 //  AiZhiChu
 //
-//  Created by Ezreal on 16/6/17.
+//  Created by Ezreal on 16/6/13.
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
 
 #import "AppDelegate.h"
+
+#import "AZCLaunchController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [[AZCLaunchController alloc] init];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

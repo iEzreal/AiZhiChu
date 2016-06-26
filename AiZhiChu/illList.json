@@ -1,0 +1,53 @@
+[
+  {
+  "illName": "发烧",
+  "illNote": "风寒发烧这4个退烧穴在身体上自上到下，从后到前灸一遍即可，每穴20分钟，风热引起的不灸。",
+  "illPic": ["fx1","fx2"]
+  },
+ 
+  {
+  "illName": "失眠",
+  "illNote": "每穴40分钟，1天1次，一次2个穴，10天1个疗程。",
+  "illPic": ["sm1","sm2"]
+  },
+  {
+  "illName": "高血压",
+  "illNote": "每穴40分钟，1天1次，一次2个穴，10天1个疗程。",
+  "illPic": ["gxy"]
+  },
+  {
+  "illName": "颈椎病",
+  "illNote": "每穴40分钟，1天1次，一次2个穴，10天1个疗程。",
+  "illPic": ["jz"]
+  },
+  {
+  "illName": "关节炎",
+  "illNote": "每穴40分钟，1天1次，一次2个穴，10天1个疗程。",
+  "illPic": ["gjy"]
+  },
+  {
+  "illName": "糖尿病",
+  "illNote": "每日一到两次，每次20-40分钟，每10天为一个疗程，疗程间休息3-5天继续第二轮的治疗，三个疗程统计疗效。",
+  "illPic": ["tangniaobing1","tangniaobing2"]
+  },
+  {
+  "illName": "女性病",
+  "illNote": "主治痛经，月经不调，每穴40分钟，1天1次，一次2个穴10天1个疗程。",
+  "illPic": ["nvxingbing"]
+  },
+  {
+  "illName": "男性病",
+  "illNote": "主治遗精，遗精乃精关不固所致，主要责之肾。与心脾也有关。每穴40分钟，1天1次，1次2穴，10天1个疗程。",
+  "illPic": ["nanxingbing"]
+  },
+  {
+  "illName": "肠胃炎",
+  "illNote": "患者应多吃新鲜蔬菜水果，特别是香蕉、红薯、可经常饮用蜂蜜等。",
+  "illPic": ["changweibing"]
+  },
+  {
+  "illName": "手脚冷",
+  "illNote": "每日客灸1-2个穴位，每个穴位20-30分钟之间隔天再施灸余下的穴位。灸泉穴前可先用热水泡脚20-30分钟。",
+  "illPic": ["shoujiaoleng1", "shoujiaoleng2", "shoujiaoleng3"]
+  }
+]

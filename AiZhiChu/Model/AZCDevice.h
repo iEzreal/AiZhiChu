@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AZCDevice : NSObject
+@interface AZCDevice : NSObject <NSCoding>
 
-@property(nonatomic, strong) NSString *state;
-@property(nonatomic, strong) NSString *powerState;
-@property(nonatomic, strong) NSString *temperature;
-@property(nonatomic, strong) NSString *minute;
+@property(nonatomic, strong) NSString *name;
+@property(nonatomic, strong) NSString *remarks;
+@property(nonatomic, strong) NSString *imageURL;
+@property(nonatomic, strong) NSString *isConnect;
 
 
 @end

@@ -16,9 +16,10 @@ typedef NS_ENUM(NSInteger, DevicePairResult) {
 @protocol BluetoothManagerDelegate <NSObject>
 
 @required
-- (void)devicePairResult:(NSError *)error;
 
 @optional
+- (void)deviceConnectResult:(NSError *)error;
+- (void)deviceDisconnectResult:(NSError *)error;
 - (void)receiveDeviceNotifyValue:(NSData *)data;
 
 @end
@@ -30,6 +31,10 @@ typedef NS_ENUM(NSInteger, DevicePairResult) {
 + (BluetoothManager *)sharedManager;
 - (void)startScanPeripheral;
 - (void)stopScanPeripheral;
+
+- (void)connectPeripheral;
+- (void)disConnectPeripheral;
+
 - (void)readNotifyValue;
 - (void)writeData:(NSData *)data;
 

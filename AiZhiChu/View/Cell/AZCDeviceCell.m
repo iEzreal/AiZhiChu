@@ -50,13 +50,8 @@
         make.centerY.equalTo(self.contentView);
         make.right.equalTo(self.contentView.mas_right).offset(-3);
     }];
-
-    
     return self;
 }
-
-
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

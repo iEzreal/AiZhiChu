@@ -14,7 +14,8 @@
 
 
 #import "BluetoothManager.h"
-#import "DataConversionUtil.h"
+#import "DeviceManager.h"
+#import "Util.h"
 
 
 #import "ImageTextButton.h"
@@ -23,7 +24,9 @@
 #import "UIImage+Color.h"
 
 #import "AZCMacro.h"
+
 #import <Masonry/Masonry.h>
+#import "MBProgressHUD.h"
 
 
 #endif /* AiZhiChuPrefix_pch */

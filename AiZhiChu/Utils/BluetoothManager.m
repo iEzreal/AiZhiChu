@@ -61,7 +61,7 @@ static BluetoothManager *instance = nil;
         NSLog(@"====== 发现外设 ======");
         NSLog(@"%@", peripheral);
         _peripheral = peripheral;
-        [self connectPeripheral:_peripheral];
+        [self connectPeripheral];
     }
 }
 
@@ -73,14 +73,25 @@ static BluetoothManager *instance = nil;
     _peripheral = peripheral;
     _peripheral.delegate = self;
     [_peripheral discoverServices:nil];
-    if ([self.delegate respondsToSelector:@selector(devicePairResult:)]) {
-        [self.delegate devicePairResult:nil];
+    if ([self.delegate respondsToSelector:@selector(deviceConnectResult:)]) {
+        [self.delegate deviceConnectResult:nil];
     }
 
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-    [self.delegate devicePairResult:error];
+    if ([self.delegate respondsToSelector:@selector(deviceConnectResult:)]) {
+        [self.delegate deviceConnectResult:error];
+    }
+}
+
+/****************************************************************************/
+/*					     	   外设断开结果回调                                */
+/****************************************************************************/
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(deviceDisconnectResult:)]) {
+        [self.delegate deviceDisconnectResult:error];
+    }
 }
 
 /****************************************************************************/
@@ -133,16 +144,12 @@ static BluetoothManager *instance = nil;
         if ([self.delegate respondsToSelector:@selector(receiveDeviceNotifyValue:)]) {
             [self.delegate receiveDeviceNotifyValue:[[NSData alloc] initWithData:characteristic.value]];
         }
-//        NSLog(@"==== 接收 notify value ====");
-//        NSData *responseData = [[NSData alloc] initWithData:characteristic.value];
-//        Byte *value = (Byte *)[responseData bytes];
-//        for(int i =0; i < [responseData length]; i++) {
-//            NSLog(@"==== 接受的值 ===%hhu", value[i]);
-//            NSString *str = [NSString stringWithFormat:@"%hhu",value[i]];
-//            NSLog(@"hhhhhhh: %@", str);
-//            NSLog(@"kkkkkkk: %d", [DataConversionUtil byte2Int:value[i]]);
-        
-//        }
+        NSLog(@"==== 接收 notify value ====");
+        NSData *responseData = [[NSData alloc] initWithData:characteristic.value];
+        Byte *value = (Byte *)[responseData bytes];
+        for(int i =0; i < [responseData length]; i++) {
+            NSLog(@"==== 接受的值 ===%hhu", value[i]);
+        }
     }
 }
 
@@ -172,18 +179,16 @@ static BluetoothManager *instance = nil;
 }
 
 /****************************************************************************/
-/*								 连接外设                                    */
+/*								 连接、断开外设                               */
 /****************************************************************************/
-- (void)connectPeripheral:(CBPeripheral *)peripheral {
+- (void)connectPeripheral {
     NSDictionary *connectOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey];
-    [_bleCentralM connectPeripheral:peripheral options:connectOptions];
+    [_bleCentralM connectPeripheral:_peripheral options:connectOptions];
 }
 
-
-- (void)disConnectPeripheral:(CBPeripheral *)peripheral {
-    [_bleCentralM cancelPeripheralConnection:peripheral];
+- (void)disConnectPeripheral {
+    [_bleCentralM cancelPeripheralConnection:_peripheral];
 }
-
 
 /****************************************************************************/
 /*							   写数据到外设                                   */

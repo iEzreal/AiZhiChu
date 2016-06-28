@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataConversionUtil : NSObject
+@interface Util : NSObject
 
 + (int)byte2Int:(Byte)byte;
 + (Byte *)int2Byte:(int)value;

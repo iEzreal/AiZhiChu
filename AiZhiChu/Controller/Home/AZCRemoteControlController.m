@@ -8,11 +8,13 @@
 
 #import "AZCRemoteControlController.h"
 #import "AZCDeviceListController.h"
+#import "AZCDeviceListController.h"
+
+#import "AZCDeviceMenuView.h"
 #import "AZCControlView.h"
 #import "AZCSwitchView.h"
-#import "AZCDeviceMenuView.h"
 
-@interface AZCRemoteControlController () <AZCControlViewDelegate, AZCSwitchViewDelegate, BluetoothManagerDelegate>
+@interface AZCRemoteControlController () <AZCDeviceMenuViewDelegate, AZCControlViewDelegate, AZCSwitchViewDelegate, BluetoothManagerDelegate>
 
 @property(nonatomic, strong)AZCDeviceMenuView *deviceMenuView;
 
@@ -50,54 +52,95 @@
 
 }
 
-
 #pragma mark - BluetoothManagerDelegate
-- (void)devicePairResult:(NSError *)error {
+/****************************************************************************/
+/*						        蓝牙操作回调                                  */
+/****************************************************************************/
+- (void)deviceConnectResult:(NSError *)error {
+    if (!error) {
+        [_deviceMenuView updateConnectState:true];
+    }
+}
+- (void)deviceDisconnectResult:(NSError *)error {
+    if (!error) {
+        [_deviceMenuView updateConnectState:false];
+    }
 
 }
 - (void)receiveDeviceNotifyValue:(NSData *)data {
     Byte *value = (Byte *)[data bytes];
     
     // 开关
-    if ([DataConversionUtil byte2Int:value[3]] == 0x00) {
+    if ([Util byte2Int:value[3]] == 0x00) {
         _switchView.on = NO;
     } else {
         _switchView.on = YES;
     }
     
     // 红光 (0x00 -> All LED off) (0x01 -> Red LED on) (0x02 -> Blue LED on) (0x03 -> All on)
-    if ([DataConversionUtil byte2Int:value[4]] == 0x01) {
+    if ([Util byte2Int:value[4]] == 0x01) {
         _redlightView.on = YES;
     } else {
         _redlightView.on = NO;
     }
     
     // 温度
-    _tempView.sliderValue = [DataConversionUtil byte2Int:value[5] - 20];
+    _tempView.sliderValue = [Util byte2Int:value[5] - 20];
     
     // 时间
-    _timeView.sliderValue = [DataConversionUtil byte2Int:value[7]];
+    _timeView.sliderValue = [Util byte2Int:value[7]];
 
     for(int i =0; i < [data length]; i++) {
         NSLog(@"==== 接受的值 ===%hhu", value[i]);
     }
 }
 
-
-#pragma mark - 设备菜单
+#pragma mark - 设备菜单操作
+/****************************************************************************/
+/*						        设备菜单开关                                  */
+/****************************************************************************/
 - (void)deviceMenuAction:(UIButton *)sender {
     if (!_deviceMenuView) {
         _deviceMenuView = [[AZCDeviceMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _deviceMenuView.delegate = self;
     }
+    
     if (_deviceMenuView.isShow) {
         [_deviceMenuView dismiss];
         
     } else {
-        [_deviceMenuView showWithView:self.view];
+        [_deviceMenuView updateDeviceWith:[DeviceManager sharedManager].currentDevice];
+        [_deviceMenuView showWithView:self];
     }
 }
 
+/****************************************************************************/
+/*						       设备菜单开关操作回调                            */
+/****************************************************************************/
+- (void)addDevice {
+    AZCDeviceListController *deviceListController = [[AZCDeviceListController alloc] init];
+    [self.navigationController pushViewController:deviceListController animated:YES];
+}
+
+- (void)deleteDevice {
+    // 删除以前应先断开蓝牙
+    [self disconnectDevice];
+    [DeviceManager sharedManager].currentDevice = nil;
+
+}
+
+- (void)connectDevice {
+    [[BluetoothManager sharedManager] connectPeripheral];
+}
+
+- (void)disconnectDevice {
+    [[BluetoothManager sharedManager] disConnectPeripheral];
+}
+
 #pragma mark - AZCControlViewDelegate
+/****************************************************************************/
+/*						      时间和温度设置                                  */
+/****************************************************************************/
 - (void)controlView:(AZCControlView *)controlView didSelectValue:(CGFloat)value {
     if (controlView.tag == 1) {
         [self writeDataWithTime:value];
@@ -108,49 +151,50 @@
 }
 
 - (void)writeDataWithTime:(int)time {
-    Byte *timeByte = [DataConversionUtil int2Byte:time];
+    Byte *timeByte = [Util int2Byte:time];
     Byte byte[4];
     byte[0] = 0x01;
     byte[1] = 0x40;
     byte[2] = 0x01;
     byte[3] = timeByte[3];
-    int crcInt = [DataConversionUtil crcCheck:byte length:4];
-    Byte *crcSesult = [DataConversionUtil int2Byte:crcInt];
+    int crcInt = [Util crcCheck:byte length:4];
+    Byte *crcSesult = [Util int2Byte:crcInt];
     [self writeDataWithCommand:0x40 parameter:byte[3] crc:crcSesult];
 }
 
-
-
 - (void)writeDataWithTemp:(int)temp {
-    Byte *tempByte = [DataConversionUtil int2Byte:(temp + 20)];
+    Byte *tempByte = [Util int2Byte:(temp + 20)];
     Byte byte[4];
     byte[0] = 0x01;
     byte[1] = 0x30;
     byte[2] = 0x01;
     byte[3] = tempByte[3];
-    int crcInt = [DataConversionUtil crcCheck:byte length:4];
-    Byte *crcSesult = [DataConversionUtil int2Byte:crcInt];
+    int crcInt = [Util crcCheck:byte length:4];
+    Byte *crcSesult = [Util int2Byte:crcInt];
     [self writeDataWithCommand:0x30 parameter:byte[3] crc:crcSesult];
     
 }
 
 
 #pragma mark - AZCSwitchViewDelegate
+/****************************************************************************/
+/*						      开关和LED设置                                   */
+/****************************************************************************/
 - (void)switchView:(AZCSwitchView *)switchView status:(BOOL)status {
     // 0x10：Power
     if (switchView.tag == 100) {
         // 0x00：Power off 0x01：Power on
         if (status) {
             Byte crcSrc[] = {0x01, 0x10, 0x01, 0x01};
-            int crcInt = [DataConversionUtil crcCheck:crcSrc length:4];
-            Byte *crcSesult = [DataConversionUtil int2Byte:crcInt];
+            int crcInt = [Util crcCheck:crcSrc length:4];
+            Byte *crcSesult = [Util int2Byte:crcInt];
             [self writeDataWithCommand:0x10 parameter:0x01 crc:crcSesult];
             free(crcSesult);
             
         } else {
             Byte crcSrc[] = {0x01, 0x10, 0x01, 0x00};
-            int crcInt = [DataConversionUtil crcCheck:crcSrc length:4];
-            Byte *crcSesult = [DataConversionUtil int2Byte:crcInt];
+            int crcInt = [Util crcCheck:crcSrc length:4];
+            Byte *crcSesult = [Util int2Byte:crcInt];
             [self writeDataWithCommand:0x10 parameter:0x00 crc:crcSesult];
         
         }
@@ -160,13 +204,13 @@
     else {
         if (status) {
             Byte crcSrc[] = {0x01, 0x20, 0x01, 0x01};
-            int crcInt = [DataConversionUtil crcCheck:crcSrc length:4];
-            Byte *crcSesult = [DataConversionUtil int2Byte:crcInt];
+            int crcInt = [Util crcCheck:crcSrc length:4];
+            Byte *crcSesult = [Util int2Byte:crcInt];
             [self writeDataWithCommand:0x20 parameter:0x01 crc:crcSesult];
         } else {
             Byte crcSrc[] = {0x01, 0x20, 0x01, 0x00};
-            int crcInt = [DataConversionUtil crcCheck:crcSrc length:4];
-            Byte *crcSesult = [DataConversionUtil int2Byte:crcInt];
+            int crcInt = [Util crcCheck:crcSrc length:4];
+            Byte *crcSesult = [Util int2Byte:crcInt];
             [self writeDataWithCommand:0x20 parameter:0x00 crc:crcSesult];
         }
         
@@ -174,6 +218,9 @@
     
 }
 
+/****************************************************************************/
+/*				      向外设写数据，所有的设置都调用该方法                        */
+/****************************************************************************/
 - (void)writeDataWithCommand:(Byte)commond parameter:(Byte)parameter crc:(Byte *)crc {
     Byte byte[7];
     byte[0] = 0x01;
@@ -188,6 +235,10 @@
     [[BluetoothManager sharedManager] writeData:data];
 }
 
+#pragma mark - UI页面
+/****************************************************************************/
+/*						          UI页面                                     */
+/****************************************************************************/
 - (void)sutupPageSubviews {
     _bgView = [[UIView alloc] init];
     _bgView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];

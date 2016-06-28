@@ -10,4 +10,6 @@
 
 @interface AZCDevicePairController : AZCBaseController
 
+@property(nonatomic, strong) NSString *deviceName;
+
 @end

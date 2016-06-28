@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
 
-#import "DataConversionUtil.h"
+#import "Util.h"
 
-@implementation DataConversionUtil
+@implementation Util
 
 + (int)byte2Int:(Byte)byte {
     return byte & 0xff;
@@ -36,7 +36,6 @@
             }
         }
     }
-    
     wCrc = (wCrc << 8) | (wCrc >> 8 & 0xff);
     return wCrc & 0xffff;
 

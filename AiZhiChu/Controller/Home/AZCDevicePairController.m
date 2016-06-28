@@ -10,6 +10,7 @@
 #import "AZCDevicePairSuccessController.h"
 #import "AZCDevicePairFailController.h"
 #import "BluetoothManager.h"
+#import "AZCDevice.h"
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
@@ -47,7 +48,7 @@
 }
 
 #pragma mark - BluetoothManagerDelegate
-- (void)devicePairResult:(NSError *)error {
+- (void)deviceConnectResult:(NSError *)error {
     // 配对失败
     if (error) {
         AZCDevicePairFailController *failController = [[AZCDevicePairFailController alloc] init];
@@ -57,6 +58,10 @@
 
     // 配对成功
     else {
+        AZCDevice *device = [[AZCDevice alloc] init];
+        device.name = _deviceName;
+        device.isConnect = @"1";
+        [DeviceManager sharedManager].currentDevice = device;
         AZCDevicePairSuccessController *successController = [[AZCDevicePairSuccessController alloc] init];
         [self.navigationController pushViewController:successController animated:YES];
     }

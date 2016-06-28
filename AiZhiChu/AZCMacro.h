@@ -15,9 +15,6 @@
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
-
-#define UUID_BIANXIESHI @"00001801-0000-1000-8000-00805f9b34fb"
-
 static NSString *SERVICE_NOTIFY_DATA = @"";
 static NSString *SERVICE_WRITE_DATA = @"";
 static NSString *CHARACTERISTIC_NOTIFY_DATA = @"";

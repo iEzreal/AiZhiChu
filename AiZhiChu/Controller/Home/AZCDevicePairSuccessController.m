@@ -13,7 +13,7 @@
 
 @property(nonatomic, strong) UIImageView *successLogo;
 @property(nonatomic, strong) UIImageView *deviceLogo;
-@property(nonatomic, strong) UITextField *deviceNameTF;
+@property(nonatomic, strong) UITextField *deviceRemarksTF;
 
 @property(nonatomic, strong) UIButton *finishButton;
 
@@ -42,6 +42,7 @@
 }
 
 - (void)finishAction:(UIButton *)sender {
+    [DeviceManager sharedManager].currentDevice.remarks = _deviceRemarksTF.text;
     AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -55,11 +56,11 @@
     _deviceLogo.image = [UIImage imageNamed:@"device_pair"];
     [self.view addSubview:_deviceLogo];
     
-    _deviceNameTF = [[UITextField alloc] init];
-    _deviceNameTF.textAlignment = NSTextAlignmentCenter;
-    _deviceNameTF.placeholder = @"点击备注设备名字";
-    _deviceNameTF.delegate = self;
-    [self.view addSubview:_deviceNameTF];
+    _deviceRemarksTF = [[UITextField alloc] init];
+    _deviceRemarksTF.textAlignment = NSTextAlignmentCenter;
+    _deviceRemarksTF.placeholder = @"点击备注设备名字";
+    _deviceRemarksTF.delegate = self;
+    [self.view addSubview:_deviceRemarksTF];
     
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.layer.cornerRadius = 20;
@@ -82,7 +83,7 @@
         make.center.equalTo(self.view);
     }];
     
-    [_deviceNameTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_deviceRemarksTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_deviceLogo.mas_bottom).offset(20);
         make.centerX.equalTo(self.view);
     }];

@@ -77,6 +77,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     AZCDevicePairController *controlller = [[AZCDevicePairController alloc] init];
+    controlller.deviceName = [_deviceArray[indexPath.row] objectForKey:@"name"];
     [self.navigationController pushViewController:controlller animated:YES];
 }
 

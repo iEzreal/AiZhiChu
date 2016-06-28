@@ -48,7 +48,7 @@
         if ([self.delegate respondsToSelector:@selector(devicePairFailReconnect)]) {
             [self.delegate devicePairFailReconnect];
         }
-        [self.navigationController popViewControllerAnimated:self];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

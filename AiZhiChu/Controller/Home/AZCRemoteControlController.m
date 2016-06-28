@@ -34,17 +34,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"遥控器";
-    UIButton *deviceMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    deviceMenuButton.frame = CGRectMake(0, 0, 30, 30);
-    [deviceMenuButton setImage:[UIImage imageNamed:@"device_menu"] forState:UIControlStateNormal];
-    [deviceMenuButton addTarget:self action:@selector(deviceMenuAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deviceMenuButton];
-    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     [self sutupPageSubviews];
     
     [BluetoothManager  sharedManager].delegate = self;
     [[BluetoothManager sharedManager] readNotifyValue];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +54,10 @@
 /****************************************************************************/
 /*						        蓝牙操作回调                                  */
 /****************************************************************************/
+- (void)bluetoothChangeState {
+
+}
+
 - (void)deviceConnectResult:(NSError *)error {
     if (!error) {
         [_deviceMenuView updateConnectState:true];
@@ -65,33 +67,41 @@
     if (!error) {
         [_deviceMenuView updateConnectState:false];
     }
-
 }
-- (void)receiveDeviceNotifyValue:(NSData *)data {
-    Byte *value = (Byte *)[data bytes];
-    
-    // 开关
-    if ([Util byte2Int:value[3]] == 0x00) {
-        _switchView.on = NO;
-    } else {
-        _switchView.on = YES;
-    }
-    
-    // 红光 (0x00 -> All LED off) (0x01 -> Red LED on) (0x02 -> Blue LED on) (0x03 -> All on)
-    if ([Util byte2Int:value[4]] == 0x01) {
-        _redlightView.on = YES;
-    } else {
-        _redlightView.on = NO;
-    }
-    
-    // 温度
-    _tempView.sliderValue = [Util byte2Int:value[5] - 20];
-    
-    // 时间
-    _timeView.sliderValue = [Util byte2Int:value[7]];
 
-    for(int i =0; i < [data length]; i++) {
-        NSLog(@"==== 接受的值 ===%hhu", value[i]);
+- (void)writeDataResult:(NSError *)error {
+    if (error) {
+        DLog(@"==== 写数据出错 ===%@", [error localizedFailureReason]);
+    } else {
+        DLog(@"==== 写数据成功 ===");
+    }
+}
+
+- (void)receiveData:(NSData *)data error:(NSError *)error {
+    if (error) {
+        DLog(@"==== 接受数据出错 ===%@", [error localizedFailureReason]);
+        return;
+    }
+    NSData *responseData = [[NSData alloc] initWithData:data];
+    if (responseData.length != 0) {
+        Byte *value = (Byte *)[data bytes];
+        _tempView.sliderValue = [Util byte2Int:value[5] - 20];
+        _timeView.sliderValue = [Util byte2Int:value[7]];
+        
+        if ([Util byte2Int:value[3]] == 0x00) {
+            _switchView.on = NO;
+        } else {
+            _switchView.on = YES;
+        }
+        
+        if ([Util byte2Int:value[4]] == 0x01) {
+            _redlightView.on = YES;
+        } else {
+            _redlightView.on = NO;
+        }
+    } else {
+        DLog(@"蓝牙已连接，请开开设备");
+        [[BluetoothManager sharedManager] readNotifyValue];
     }
 }
 
@@ -240,6 +250,13 @@
 /*						          UI页面                                     */
 /****************************************************************************/
 - (void)sutupPageSubviews {
+    UIButton *deviceMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    deviceMenuButton.frame = CGRectMake(0, 0, 30, 30);
+    [deviceMenuButton setImage:[UIImage imageNamed:@"device_menu"] forState:UIControlStateNormal];
+    [deviceMenuButton addTarget:self action:@selector(deviceMenuAction:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deviceMenuButton];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
     _bgView = [[UIView alloc] init];
     _bgView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
     [self.view addSubview:_bgView];
@@ -258,7 +275,7 @@
     _tempView.tag = 2;
     _tempView.minimumValue = 0;
     _tempView.maximumValue = 170;
-    _tempView.sliderValue = 100;
+    _tempView.sliderValue = 0;
     _tempView.delegate = self;
     [self.view addSubview:_tempView];
     
@@ -276,6 +293,5 @@
     [self.view addSubview:_redlightView];
     _bgView.frame = CGRectMake(0, 0, SCREEN_WIDTH, CGRectGetMinY(_redlightView.frame));
 }
-
 
 @end

@@ -139,17 +139,9 @@ static BluetoothManager *instance = nil;
 /*							接收 notify value 回调                           */
 /****************************************************************************/
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    if (!error) {
-        
-        if ([self.delegate respondsToSelector:@selector(receiveDeviceNotifyValue:)]) {
-            [self.delegate receiveDeviceNotifyValue:[[NSData alloc] initWithData:characteristic.value]];
-        }
-        NSLog(@"==== 接收 notify value ====");
-        NSData *responseData = [[NSData alloc] initWithData:characteristic.value];
-        Byte *value = (Byte *)[responseData bytes];
-        for(int i =0; i < [responseData length]; i++) {
-            NSLog(@"==== 接受的值 ===%hhu", value[i]);
-        }
+    DLog(@"==== 接收数据据结果回调 ====");
+    if ([self.delegate respondsToSelector:@selector(receiveData:error:)]) {
+        [self.delegate receiveData:characteristic.value error:error];
     }
 }
 
@@ -157,12 +149,10 @@ static BluetoothManager *instance = nil;
 /*							    写数据结果回调                                */
 /****************************************************************************/
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    if (error) {
-        NSLog(@"==== 写数据失败 ==== %@", error);
-        return;
+    DLog(@"==== 写数据结果回调 ====");
+    if ([self.delegate respondsToSelector:@selector(writeDataResult:)]) {
+        [self.delegate writeDataResult:error];
     }
-    
-    NSLog(@"==== 写数据成功 ====");
 }
 
 #pragma mark - 外部操作方法
@@ -187,7 +177,9 @@ static BluetoothManager *instance = nil;
 }
 
 - (void)disConnectPeripheral {
-    [_bleCentralM cancelPeripheralConnection:_peripheral];
+    if (_peripheral.state == CBPeripheralStateConnected) {
+        [_bleCentralM cancelPeripheralConnection:_peripheral];
+    }
 }
 
 /****************************************************************************/

@@ -19,8 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[DeviceManager sharedManager] archiveDevices];
-    
+    [[DeviceManager sharedManager] unarchiveDevices];
+        
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[AZCLaunchController alloc] init];
@@ -47,9 +47,10 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // 已连接设备归档
+    if ([DeviceManager sharedManager].currentDevice) {
+        [DeviceManager sharedManager].currentDevice.isConnect = @"0";
+    }
     [[DeviceManager sharedManager] archiveDevices];
-    
 }
 
 @end

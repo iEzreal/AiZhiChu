@@ -8,19 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, DevicePairResult) {
-    DevicePairResultSuccess,
-    DevicePairResultFail
-};
-
 @protocol BluetoothManagerDelegate <NSObject>
 
 @required
+- (void)bluetoothChangeState;
 
 @optional
 - (void)deviceConnectResult:(NSError *)error;
 - (void)deviceDisconnectResult:(NSError *)error;
-- (void)receiveDeviceNotifyValue:(NSData *)data;
+- (void)receiveData:(NSData *)data error:(NSError *)error;
+- (void)writeDataResult:(NSError *)error;
 
 @end
 

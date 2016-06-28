@@ -8,6 +8,7 @@
 
 #import "AZCHomeController.h"
 #import "AZCRegimenController.h"
+#import "AZCRemoteControlController.h"
 #import "AZCDeviceFirstAddController.h"
 
 #import "AZCHomeBannerCell.h"
@@ -82,23 +83,38 @@
     else {
         static NSString *menuCellIdentifier = @"AZHHomeMenuCell";
         AZCHomeMenuCell *menuCell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier];
-        __weak typeof(self) weakself = self;
         if (!menuCell) {
             menuCell = [[AZCHomeMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:menuCellIdentifier];
-            menuCell.block = ^(NSInteger index){
-                if (index == 0) {
-                    AZCRegimenController *controller = [[AZCRegimenController alloc] init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [weakself.navigationController pushViewController:controller animated:YES];
-                } else if (index == 2) {
-                    AZCDeviceFirstAddController *controller = [[AZCDeviceFirstAddController alloc] init];
-                    controller.hidesBottomBarWhenPushed = YES;
-                    [weakself.navigationController pushViewController:controller animated:YES];
-                }
-                
-            };
         }
+        __weak typeof(self) weakself = self;
+        menuCell.block = ^(NSInteger index){
+            if (index == 0) {
+                [weakself redirectWithController:[[AZCRegimenController alloc] init]];
+                
+            } else if (index == 2) {
+                [weakself redirectToRemoteControl];
+            }
+        };
         return menuCell;
+    }
+}
+
+- (void)redirectWithController:(UIViewController *)controller {
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)redirectToRemoteControl{
+    if ([DeviceManager sharedManager].currentDevice) {
+        AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+       
+    } else {
+        AZCDeviceFirstAddController *controller = [[AZCDeviceFirstAddController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+       
     }
 }
 

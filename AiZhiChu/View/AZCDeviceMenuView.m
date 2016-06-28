@@ -115,7 +115,7 @@
         if ([device.isConnect isEqualToString:@"1"]) {
             [self updateConnectState:YES];
         } else {
-            [self updateConnectState:YES];
+            [self updateConnectState:NO];
         }
         _deleteDeviceButton.enabled = YES;
         _deviceView.hidden = NO;

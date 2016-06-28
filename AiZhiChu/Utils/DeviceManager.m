@@ -32,7 +32,7 @@ static DeviceManager *instance = nil;
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     [archiver encodeObject:_currentDevice forKey:@"device"];
     [archiver finishEncoding];
-    [data writeToFile:[self applicationDocumentsDirectoryFile] atomically:YES];
+    BOOL b = [data writeToFile:[self applicationDocumentsDirectoryFile] atomically:YES];
 }
 
 - (void)unarchiveDevices {

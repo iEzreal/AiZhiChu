@@ -24,14 +24,14 @@
     [super viewDidLoad];
     self.title = @"设备配对失败";
     
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.tag = 10;
-    backButton.frame = CGRectMake(0, 0, 30, 30);
-    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
-    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.navigationItem.leftBarButtonItem = leftButtonItem;
+//    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    backButton.tag = 10;
+//    backButton.frame = CGRectMake(0, 0, 30, 30);
+//    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+//    [backButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+//    [backButton addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+//    self.navigationItem.leftBarButtonItem = leftButtonItem;
     
     [self setupPageSubviews];
     [self layoutPageSubviews];

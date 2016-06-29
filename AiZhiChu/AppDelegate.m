@@ -19,6 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [self navConfig];
+
     [[DeviceManager sharedManager] unarchiveDevices];
         
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -26,6 +28,12 @@
     self.window.rootViewController = [[AZCLaunchController alloc] init];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)navConfig {
+    [UINavigationBar appearance].barTintColor = [UIColor colorWithHexString:NavigationBarColor];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor colorWithHexString:NavigationBarTitleColor]};
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

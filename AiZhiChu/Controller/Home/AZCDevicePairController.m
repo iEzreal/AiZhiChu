@@ -9,10 +9,9 @@
 #import "AZCDevicePairController.h"
 #import "AZCDevicePairSuccessController.h"
 #import "AZCDevicePairFailController.h"
-#import "BluetoothManager.h"
 #import "AZCDevice.h"
 
-#import <CoreBluetooth/CoreBluetooth.h>
+#import "TestController.h"
 
 
 @interface AZCDevicePairController ()<BluetoothManagerDelegate, AZCDevicePairFailReconnectDelegate>
@@ -20,13 +19,6 @@
 @property(nonatomic, strong) UIImageView *progressBar;
 @property(nonatomic, strong) UIImageView *deviceLogo;
 @property(nonatomic, strong) UILabel *pairHintLaber;
-
-
-@property (nonatomic, strong) CBCentralManager *bleCentralM;
-@property (nonatomic, strong) CBPeripheral *peripheral;
-@property (nonatomic, strong) CBService *service;
-@property (nonatomic, strong) CBCharacteristic *writeCharacteristic;
-@property (nonatomic, strong) CBCharacteristic *notifyCharacteristc;
 
 @end
 
@@ -58,12 +50,14 @@
 
     // 配对成功
     else {
-        AZCDevice *device = [[AZCDevice alloc] init];
-        device.name = _deviceName;
-        device.isConnect = @"1";
-        [DeviceManager sharedManager].currentDevice = device;
-        AZCDevicePairSuccessController *successController = [[AZCDevicePairSuccessController alloc] init];
-        [self.navigationController pushViewController:successController animated:YES];
+        TestController *test = [[TestController alloc] init];
+        [self.navigationController pushViewController:test animated:YES];
+//        AZCDevice *device = [[AZCDevice alloc] init];
+//        device.name = _deviceName;
+//        device.isConnect = @"1";
+//        [DeviceManager sharedManager].currentDevice = device;
+//        AZCDevicePairSuccessController *successController = [[AZCDevicePairSuccessController alloc] init];
+//        [self.navigationController pushViewController:successController animated:YES];
     }
     [self stopAnimation];
 }

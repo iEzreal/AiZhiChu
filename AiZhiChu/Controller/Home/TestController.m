@@ -1,15 +1,15 @@
 //
-//  AZCDevicePairSuccesslController.m
+//  TestController.m
 //  AiZhiChu
 //
-//  Created by Ezreal on 16/6/22.
+//  Created by Ezreal on 16/6/29.
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
 
-#import "AZCDevicePairSuccessController.h"
+#import "TestController.h"
 #import "AZCRemoteControlController.h"
 
-@interface AZCDevicePairSuccessController () <UITextFieldDelegate>
+@interface TestController () <UITextFieldDelegate>
 
 @property(nonatomic, strong) UIImageView *successLogo;
 @property(nonatomic, strong) UIImageView *deviceLogo;
@@ -19,14 +19,18 @@
 
 @end
 
-@implementation AZCDevicePairSuccessController
+@implementation TestController
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     self.title = @"配对成功";
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [self setupPageSubviews];
     [self layoutPageSubciews];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

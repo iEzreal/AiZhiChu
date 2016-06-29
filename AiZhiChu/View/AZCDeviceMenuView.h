@@ -25,7 +25,7 @@
 @property(nonatomic, assign) BOOL isShow;
 
 - (void)updateDeviceWith:(AZCDevice *)device;
-- (void)updateConnectState:(BOOL)state;
+- (void)updateDeviceState:(BOOL)state;
 - (void)showWithView:(UIViewController *)superController;
 - (void)dismiss;
 

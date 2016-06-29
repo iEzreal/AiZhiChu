@@ -24,7 +24,7 @@
 @property(nonatomic, strong) UIImageView *deviceImage;
 @property(nonatomic, strong) UILabel *deviceName;
 @property(nonatomic, strong) UILabel *deviceRemarks;
-@property(nonatomic, strong) UIButton *bleMagButton;
+@property(nonatomic, strong) UILabel *deviceState;
 @property(nonatomic, strong) UIButton *deleteButton;
 
 @property(nonatomic, assign) BOOL isDeleteState;
@@ -76,20 +76,6 @@
             }];
         }
     }
-    // 断开蓝牙连接
-    else if (sender.tag == 103) {
-        if ([sender.titleLabel.text isEqualToString:@"断开连接"]) {
-            if ([self.delegate respondsToSelector:@selector(disconnectDevice)]) {
-                [self.delegate disconnectDevice];
-            }
-
-        } else {
-            if ([self.delegate respondsToSelector:@selector(connectDevice)]) {
-                [self.delegate connectDevice];
-            }
-
-        }
-    }
     // 删除当前设备
     else {
         if ([self.delegate respondsToSelector:@selector(deleteDevice)]) {
@@ -102,7 +88,7 @@
 - (void)deleteDeviceInfo{
     _deviceName.text = @"";
     _deviceRemarks.text = @"";
-    [_bleMagButton setTitle:@"" forState:UIControlStateNormal];
+    _deviceState.text = @"";
     _deleteDeviceButton.enabled = NO;
     _deviceView.hidden = YES;
     _deleteButton.hidden = YES;
@@ -113,9 +99,9 @@
         _deviceName.text = device.name;
         _deviceRemarks.text = device.remarks;
         if ([device.isConnect isEqualToString:@"1"]) {
-            [self updateConnectState:YES];
+            [self updateDeviceState:YES];
         } else {
-            [self updateConnectState:NO];
+            [self updateDeviceState:NO];
         }
         _deleteDeviceButton.enabled = YES;
         _deviceView.hidden = NO;
@@ -128,11 +114,11 @@
     }
 }
 
-- (void)updateConnectState:(BOOL)state {
+- (void)updateDeviceState:(BOOL)state {
     if (state) {
-        [_bleMagButton setTitle:@"断开连接" forState:UIControlStateNormal];
+        _deviceState.text = @"已连接";
     } else {
-        [_bleMagButton setTitle:@"重新连接" forState:UIControlStateNormal];
+        _deviceState.text = @"未连接";
     }
 }
 
@@ -212,12 +198,11 @@
     _deviceRemarks.font = [UIFont systemFontOfSize:14];
     [_deviceView addSubview:_deviceRemarks];
     
-    _bleMagButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    _bleMagButton.frame = CGRectMake(_deviceView.frame.size.width - 70, 15, 60, 30);
-    [_bleMagButton setTitleColor:[UIColor colorWithHexString:@"4C4C4C"] forState:UIControlStateNormal];
-    [_bleMagButton addTarget:self action:@selector(deviceManagerAction:) forControlEvents:UIControlEventTouchUpInside];
-    _bleMagButton.tag = 103;
-    [_deviceView addSubview:_bleMagButton];
+    _deviceState = [[UILabel alloc] init];
+    _deviceState.frame = CGRectMake(_deviceView.frame.size.width - 60, 15, 60, 30);
+    _deviceState.textColor = [UIColor colorWithHexString:@"4C4C4C"];
+    _deviceState.font = [UIFont systemFontOfSize:14];
+    [_deviceView addSubview:_deviceState];
     
     _deleteButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _deleteButton.backgroundColor = [UIColor redColor];

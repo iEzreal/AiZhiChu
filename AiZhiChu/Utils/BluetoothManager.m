@@ -45,10 +45,9 @@ static BluetoothManager *instance = nil;
 /*								 蓝牙状态                                    */
 /****************************************************************************/
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    if ([central state] == CBCentralManagerStatePoweredOn) {
-        [self startScanPeripheral];
-    } else {
-        NSLog(@"====== 蓝牙不可用 ======");
+    DLog(@"====== 蓝牙状态 ======：%ld", (long)[central state]);
+    if ([self.delegate respondsToSelector:@selector(bluetoothChangeState:)]) {
+        [self.delegate bluetoothChangeState:[central state]];
     }
 }
 
@@ -182,6 +181,13 @@ static BluetoothManager *instance = nil;
     }
 }
 
+- (BOOL)isConnect {
+    if (_peripheral && _peripheral.state == CBPeripheralStateConnected) {
+        return true;
+    }
+    return false;
+}
+
 /****************************************************************************/
 /*							   写数据到外设                                   */
 /****************************************************************************/
@@ -198,7 +204,7 @@ static BluetoothManager *instance = nil;
 /****************************************************************************/
 - (void)readNotifyValue {
     if(!_notifyCharacteristc) {
-        NSLog(@"当前没有匹配的特征值");
+        DLog(@"==== 蓝牙连接异常，无法读取数据 ====");
         return;
     }
     [_peripheral setNotifyValue:YES forCharacteristic:_notifyCharacteristc];

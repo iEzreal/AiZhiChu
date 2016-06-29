@@ -7,6 +7,7 @@
 //
 
 #import "AZCAcupointDetailsController.h"
+#import "AZCRemoteControlController.h"
 
 @interface AZCAcupointDetailsController ()
 
@@ -27,7 +28,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSubviews];
-    
+    if ([BluetoothManager sharedManager].isConnect) {
+        _startButton.enabled = YES;
+    } else {
+        _startButton.enabled = NO;
+    }
+}
+
+- (void)startButtonAction {
+    AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,7 +11,7 @@
 @protocol BluetoothManagerDelegate <NSObject>
 
 @required
-- (void)bluetoothChangeState;
+- (void)bluetoothChangeState:(NSInteger)state;
 
 @optional
 - (void)deviceConnectResult:(NSError *)error;
@@ -24,6 +24,8 @@
 @interface BluetoothManager : NSObject
 
 @property(nonatomic, weak) id<BluetoothManagerDelegate> delegate ;
+@property(nonatomic, assign, getter=isConnect) BOOL Connect;
+
 
 + (BluetoothManager *)sharedManager;
 - (void)startScanPeripheral;

@@ -10,4 +10,6 @@
 
 @interface AZCBaseController : UIViewController
 
+- (void)backButtonAction;
+
 @end

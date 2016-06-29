@@ -8,6 +8,6 @@
 
 #import "AZCBaseController.h"
 
-@interface TestController : AZCBaseController
+@interface AZCDevicePairSuccessController : AZCBaseController
 
 @end

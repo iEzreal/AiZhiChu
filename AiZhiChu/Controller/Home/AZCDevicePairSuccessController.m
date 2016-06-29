@@ -6,10 +6,10 @@
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
 
-#import "TestController.h"
+#import "AZCDevicePairSuccessController.h"
 #import "AZCRemoteControlController.h"
 
-@interface TestController () <UITextFieldDelegate>
+@interface AZCDevicePairSuccessController () <UITextFieldDelegate>
 
 @property(nonatomic, strong) UIImageView *successLogo;
 @property(nonatomic, strong) UIImageView *deviceLogo;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation TestController
+@implementation AZCDevicePairSuccessController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,14 +30,14 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([textField.text isEqualToString:@""]) {
         _finishButton.enabled = NO;
     } else {

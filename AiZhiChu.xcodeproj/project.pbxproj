@@ -56,7 +56,7 @@
 		77A638C41D19A5D600B9AFD2 /* AZCDeviceFirstAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A638C31D19A5D600B9AFD2 /* AZCDeviceFirstAddController.m */; };
 		77A638C71D19AFFD00B9AFD2 /* AZCDevicePairFailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A638C61D19AFFD00B9AFD2 /* AZCDevicePairFailController.m */; };
 		77EAA3CD1D1F8E4A00BB960F /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EAA3CC1D1F8E4A00BB960F /* Util.m */; };
-		77EEE5AD1D236D84007608B4 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEE5AC1D236D84007608B4 /* TestController.m */; };
+		77EEE5AD1D236D84007608B4 /* AZCDevicePairSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEE5AC1D236D84007608B4 /* AZCDevicePairSuccessController.m */; };
 		9A68385469853E82D51F1C29 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D4BBB5A1C7B769611DD0E5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -166,8 +166,8 @@
 		77EAA3CB1D1F8E4A00BB960F /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		77EAA3CC1D1F8E4A00BB960F /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		77EAA3CE1D1FFB1400BB960F /* libMasonry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMasonry.a; path = "Pods/../build/Debug-iphoneos/libMasonry.a"; sourceTree = "<group>"; };
-		77EEE5AB1D236D84007608B4 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
-		77EEE5AC1D236D84007608B4 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
+		77EEE5AB1D236D84007608B4 /* AZCDevicePairSuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCDevicePairSuccessController.h; sourceTree = "<group>"; };
+		77EEE5AC1D236D84007608B4 /* AZCDevicePairSuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCDevicePairSuccessController.m; sourceTree = "<group>"; };
 		CEDF88FC3F7757B2DA6063A2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -327,14 +327,14 @@
 				779BEDC91D141864007DDF01 /* AZCDevicePairController.m */,
 				77A638C51D19AFFD00B9AFD2 /* AZCDevicePairFailController.h */,
 				77A638C61D19AFFD00B9AFD2 /* AZCDevicePairFailController.m */,
+				77EEE5AB1D236D84007608B4 /* AZCDevicePairSuccessController.h */,
+				77EEE5AC1D236D84007608B4 /* AZCDevicePairSuccessController.m */,
 				779BEDCA1D141864007DDF01 /* AZCHomeController.h */,
 				779BEDCB1D141864007DDF01 /* AZCHomeController.m */,
 				779BEDCC1D141864007DDF01 /* AZCRegimenController.h */,
 				779BEDCD1D141864007DDF01 /* AZCRegimenController.m */,
 				779BEDCE1D141864007DDF01 /* AZCRemoteControlController.h */,
 				779BEDCF1D141864007DDF01 /* AZCRemoteControlController.m */,
-				77EEE5AB1D236D84007608B4 /* TestController.h */,
-				77EEE5AC1D236D84007608B4 /* TestController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -624,7 +624,7 @@
 				779BEDF31D141864007DDF01 /* AZCCommonIllController.m in Sources */,
 				779BEE001D141864007DDF01 /* AZCHomeMenuCell.m in Sources */,
 				779BEE021D141864007DDF01 /* ImageTextButton.m in Sources */,
-				77EEE5AD1D236D84007608B4 /* TestController.m in Sources */,
+				77EEE5AD1D236D84007608B4 /* AZCDevicePairSuccessController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

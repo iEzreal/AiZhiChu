@@ -38,8 +38,13 @@
     [self sutupPageSubviews];
     
     [BluetoothManager  sharedManager].delegate = self;
-    [[BluetoothManager sharedManager] readNotifyValue];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(action) userInfo:nil repeats:YES];
 }
+
+- (void)action {
+    [[BluetoothManager  sharedManager] readNotifyValue];
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -60,12 +65,12 @@
 
 - (void)deviceConnectResult:(NSError *)error {
     if (!error) {
-        [_deviceMenuView updateConnectState:true];
+        
     }
 }
 - (void)deviceDisconnectResult:(NSError *)error {
     if (!error) {
-        [_deviceMenuView updateConnectState:false];
+        
     }
 }
 
@@ -99,9 +104,6 @@
         } else {
             _redlightView.on = NO;
         }
-    } else {
-        DLog(@"蓝牙已连接，请开开设备");
-        [[BluetoothManager sharedManager] readNotifyValue];
     }
 }
 
@@ -245,6 +247,21 @@
     [[BluetoothManager sharedManager] writeData:data];
 }
 
+- (void)readData {
+    
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1 * NSEC_PER_SEC, 0); //每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        //在这里执行事件
+        NSLog(@"-----------");
+    });
+    dispatch_resume(_timer);
+    //    dispatch_source_cancel(_timer);
+}
+
+
 #pragma mark - UI页面
 /****************************************************************************/
 /*						          UI页面                                     */
@@ -252,6 +269,7 @@
 - (void)sutupPageSubviews {
     UIButton *deviceMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     deviceMenuButton.frame = CGRectMake(0, 0, 30, 30);
+    deviceMenuButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -5);
     [deviceMenuButton setImage:[UIImage imageNamed:@"device_menu"] forState:UIControlStateNormal];
     [deviceMenuButton addTarget:self action:@selector(deviceMenuAction:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:deviceMenuButton];

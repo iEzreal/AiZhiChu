@@ -11,7 +11,7 @@
 #import "AZCDevicePairFailController.h"
 #import "AZCDevice.h"
 
-#import "TestController.h"
+
 
 
 @interface AZCDevicePairController ()<BluetoothManagerDelegate, AZCDevicePairFailReconnectDelegate>
@@ -40,24 +40,25 @@
 }
 
 #pragma mark - BluetoothManagerDelegate
+- (void)bluetoothChangeState:(NSInteger)state {
+    if (state == 5) {
+        [[BluetoothManager sharedManager] startScanPeripheral];
+    }
+}
+
 - (void)deviceConnectResult:(NSError *)error {
-    // 配对失败
     if (error) {
         AZCDevicePairFailController *failController = [[AZCDevicePairFailController alloc] init];
         failController.delegate = self;
         [self.navigationController pushViewController:failController animated:YES];
-    }
-
-    // 配对成功
-    else {
-        TestController *test = [[TestController alloc] init];
-        [self.navigationController pushViewController:test animated:YES];
-//        AZCDevice *device = [[AZCDevice alloc] init];
-//        device.name = _deviceName;
-//        device.isConnect = @"1";
-//        [DeviceManager sharedManager].currentDevice = device;
-//        AZCDevicePairSuccessController *successController = [[AZCDevicePairSuccessController alloc] init];
-//        [self.navigationController pushViewController:successController animated:YES];
+        
+    } else {
+        AZCDevice *device = [[AZCDevice alloc] init];
+        device.name = _deviceName;
+        device.isConnect = @"1";
+        [DeviceManager sharedManager].currentDevice = device;
+        AZCDevicePairSuccessController *successController = [[AZCDevicePairSuccessController alloc] init];
+        [self.navigationController pushViewController:successController animated:YES];
     }
     [self stopAnimation];
 }

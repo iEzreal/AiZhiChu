@@ -7,6 +7,7 @@
 //
 
 #import "AZCCommonIllDetailsController.h"
+#import "AZCRemoteControlController.h"
 #import "AZCIllRegimenPicShowView.h"
 
 @interface AZCCommonIllDetailsController ()
@@ -29,6 +30,17 @@
     
     [self setupSubviews];
     [self layoutSubviews];
+    
+    if ([BluetoothManager sharedManager].isConnect) {
+        _startButton.enabled = YES;
+    } else {
+        _startButton.enabled = NO;
+    }
+}
+
+- (void)startButtonAction {
+    AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +81,7 @@
     _startButton.layer.cornerRadius = 20;
     _startButton.layer.masksToBounds = YES;
     _startButton.titleLabel.textColor = [UIColor whiteColor];
+    [_startButton addTarget:self action:@selector(startButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [_startButton setTitle:@"启动" forState:UIControlStateNormal];
     [self.view addSubview:_startButton];
 }

@@ -17,8 +17,6 @@
     _name = [aDecoder decodeObjectForKey:@"name"];
     _remarks = [aDecoder decodeObjectForKey:@"remarks"];
     _imageURL = [aDecoder decodeObjectForKey:@"imageURL"];
-    _isConnect = [aDecoder decodeObjectForKey:@"isConnect"];
-    
     return self;
 }
 
@@ -26,8 +24,6 @@
     [aCoder encodeObject:_name forKey:@"name"];
     [aCoder encodeObject:_remarks forKey:@"remarks"];
     [aCoder encodeObject:_imageURL forKey:@"imageURL"];
-    [aCoder encodeObject:_isConnect forKey:@"isConnect"];
-
 }
 
 @end

@@ -21,6 +21,7 @@
     
     [self navConfig];
 
+    [BluetoothManager sharedManager];
     [[DeviceManager sharedManager] unarchiveDevices];
         
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -55,9 +56,6 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    if ([DeviceManager sharedManager].currentDevice) {
-        [DeviceManager sharedManager].currentDevice.isConnect = @"0";
-    }
     [[DeviceManager sharedManager] archiveDevices];
 }
 

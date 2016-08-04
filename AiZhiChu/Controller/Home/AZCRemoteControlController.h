@@ -10,4 +10,6 @@
 
 @interface AZCRemoteControlController : AZCBaseController
 
+@property(nonatomic, assign) BOOL firstConnect;
+
 @end

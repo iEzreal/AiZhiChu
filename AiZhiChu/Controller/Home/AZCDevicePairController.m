@@ -11,9 +11,6 @@
 #import "AZCDevicePairFailController.h"
 #import "AZCDevice.h"
 
-
-
-
 @interface AZCDevicePairController ()<BluetoothManagerDelegate, AZCDevicePairFailReconnectDelegate>
 
 @property(nonatomic, strong) UIImageView *progressBar;
@@ -33,6 +30,15 @@
     [self startAnimation];
     
     [BluetoothManager sharedManager].delegate = self;
+    
+    if ([BluetoothManager sharedManager].state == 5) {
+        [[BluetoothManager sharedManager] startScanPeripheral];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [BluetoothManager sharedManager].delegate = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,9 +47,7 @@
 
 #pragma mark - BluetoothManagerDelegate
 - (void)bluetoothChangeState:(NSInteger)state {
-    if (state == 5) {
-        [[BluetoothManager sharedManager] startScanPeripheral];
-    }
+
 }
 
 - (void)deviceConnectResult:(NSError *)error {
@@ -55,7 +59,6 @@
     } else {
         AZCDevice *device = [[AZCDevice alloc] init];
         device.name = _deviceName;
-        device.isConnect = @"1";
         [DeviceManager sharedManager].currentDevice = device;
         AZCDevicePairSuccessController *successController = [[AZCDevicePairSuccessController alloc] init];
         [self.navigationController pushViewController:successController animated:YES];

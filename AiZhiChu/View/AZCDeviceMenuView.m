@@ -98,11 +98,6 @@
     if (device) {
         _deviceName.text = device.name;
         _deviceRemarks.text = device.remarks;
-        if ([device.isConnect isEqualToString:@"1"]) {
-            [self updateDeviceState:YES];
-        } else {
-            [self updateDeviceState:NO];
-        }
         _deleteDeviceButton.enabled = YES;
         _deviceView.hidden = NO;
         _deleteButton.hidden = NO;

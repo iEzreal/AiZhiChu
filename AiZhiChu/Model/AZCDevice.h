@@ -13,7 +13,5 @@
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *remarks;
 @property(nonatomic, strong) NSString *imageURL;
-@property(nonatomic, strong) NSString *isConnect;
-
 
 @end

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		770D03601D13FBF30054AF7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 770D035F1D13FBF30054AF7F /* main.m */; };
 		770D03631D13FBF30054AF7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 770D03621D13FBF30054AF7F /* AppDelegate.m */; };
-		770D036B1D13FBF30054AF7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 770D036A1D13FBF30054AF7F /* Assets.xcassets */; };
 		770D036E1D13FBF30054AF7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 770D036C1D13FBF30054AF7F /* LaunchScreen.storyboard */; };
 		770D03791D13FBF40054AF7F /* AiZhiChuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 770D03781D13FBF40054AF7F /* AiZhiChuTests.m */; };
 		7718A2811D1A8CB300D3EB7B /* devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7718A2801D1A8CB300D3EB7B /* devices.plist */; };
@@ -24,6 +23,8 @@
 		7791F5111D1EB14C009C47DB /* AZCDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 7791F5101D1EB14C009C47DB /* AZCDevice.m */; };
 		7795F2B51D18FFBB00C7C088 /* AZCControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7795F2B41D18FFBB00C7C088 /* AZCControlView.m */; };
 		7795F2B81D192A8E00C7C088 /* AZCSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7795F2B71D192A8E00C7C088 /* AZCSwitchView.m */; };
+		77963A501D26A0F800D9F1D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77963A4F1D26A0F800D9F1D6 /* Assets.xcassets */; };
+		77963A551D26BFE200D9F1D6 /* AZCProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77963A541D26BFE200D9F1D6 /* AZCProgressView.m */; };
 		779BEDEA1D141864007DDF01 /* UIColor+HEX.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDB01D141864007DDF01 /* UIColor+HEX.m */; };
 		779BEDEB1D141864007DDF01 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDB21D141864007DDF01 /* UIImage+Color.m */; };
 		779BEDEC1D141864007DDF01 /* AZCBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDB51D141864007DDF01 /* AZCBaseController.m */; };
@@ -77,7 +78,6 @@
 		770D035F1D13FBF30054AF7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		770D03611D13FBF30054AF7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		770D03621D13FBF30054AF7F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		770D036A1D13FBF30054AF7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		770D036D1D13FBF30054AF7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		770D036F1D13FBF30054AF7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		770D03741D13FBF40054AF7F /* AiZhiChuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AiZhiChuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +101,9 @@
 		7795F2B41D18FFBB00C7C088 /* AZCControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCControlView.m; sourceTree = "<group>"; };
 		7795F2B61D192A8E00C7C088 /* AZCSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCSwitchView.h; sourceTree = "<group>"; };
 		7795F2B71D192A8E00C7C088 /* AZCSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCSwitchView.m; sourceTree = "<group>"; };
+		77963A4F1D26A0F800D9F1D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		77963A531D26BFE200D9F1D6 /* AZCProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCProgressView.h; sourceTree = "<group>"; };
+		77963A541D26BFE200D9F1D6 /* AZCProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCProgressView.m; sourceTree = "<group>"; };
 		779BEDAF1D141864007DDF01 /* UIColor+HEX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HEX.h"; sourceTree = "<group>"; };
 		779BEDB01D141864007DDF01 /* UIColor+HEX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HEX.m"; sourceTree = "<group>"; };
 		779BEDB11D141864007DDF01 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
@@ -232,14 +235,14 @@
 		770D035D1D13FBF30054AF7F /* AiZhiChu */ = {
 			isa = PBXGroup;
 			children = (
-				779BEDAE1D141864007DDF01 /* Categories */,
-				779BEDB31D141864007DDF01 /* Controller */,
-				779BEDD81D141864007DDF01 /* Model */,
-				779BEDD91D141864007DDF01 /* Utils */,
-				779BEDDA1D141864007DDF01 /* View */,
 				770D03611D13FBF30054AF7F /* AppDelegate.h */,
 				770D03621D13FBF30054AF7F /* AppDelegate.m */,
-				770D036A1D13FBF30054AF7F /* Assets.xcassets */,
+				779BEDAE1D141864007DDF01 /* Categories */,
+				779BEDD81D141864007DDF01 /* Model */,
+				779BEDDA1D141864007DDF01 /* View */,
+				779BEDB31D141864007DDF01 /* Controller */,
+				779BEDD91D141864007DDF01 /* Utils */,
+				77963A4F1D26A0F800D9F1D6 /* Assets.xcassets */,
 				770D035E1D13FBF30054AF7F /* Supporting Files */,
 			);
 			path = AiZhiChu;
@@ -388,6 +391,8 @@
 				77A638BD1D1977CC00B9AFD2 /* AZCDeviceMenuView.m */,
 				779BEDDB1D141864007DDF01 /* AZCIllRegimenPicShowView.h */,
 				779BEDDC1D141864007DDF01 /* AZCIllRegimenPicShowView.m */,
+				77963A531D26BFE200D9F1D6 /* AZCProgressView.h */,
+				77963A541D26BFE200D9F1D6 /* AZCProgressView.m */,
 				77405BEC1D17ED66008EDDDF /* AZCSlider.h */,
 				77405BED1D17ED66008EDDDF /* AZCSlider.m */,
 				7795F2B61D192A8E00C7C088 /* AZCSwitchView.h */,
@@ -519,8 +524,8 @@
 				7718A2811D1A8CB300D3EB7B /* devices.plist in Resources */,
 				770D036E1D13FBF30054AF7F /* LaunchScreen.storyboard in Resources */,
 				779BEE071D1419CA007DDF01 /* illList.json in Resources */,
-				770D036B1D13FBF30054AF7F /* Assets.xcassets in Resources */,
 				779BEE081D1419CA007DDF01 /* pcupoint.json in Resources */,
+				77963A501D26A0F800D9F1D6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +609,7 @@
 				77A638C71D19AFFD00B9AFD2 /* AZCDevicePairFailController.m in Sources */,
 				779BEDEB1D141864007DDF01 /* UIImage+Color.m in Sources */,
 				779BEDEF1D141864007DDF01 /* AZCRootController.m in Sources */,
+				77963A551D26BFE200D9F1D6 /* AZCProgressView.m in Sources */,
 				779BEDED1D141864007DDF01 /* AZCLaunchController.m in Sources */,
 				779BEDF21D141864007DDF01 /* AZCAcupointDetailsController.m in Sources */,
 				779BEDF41D141864007DDF01 /* AZCCommonIllDetailsController.m in Sources */,
@@ -699,7 +705,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "d7993817-967c-4b28-8bce-c287bb1969b7";
+				PROVISIONING_PROFILE = "ea8945b0-663c-4fd8-88ef-df15135439fd";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -738,7 +744,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "d7993817-967c-4b28-8bce-c287bb1969b7";
+				PROVISIONING_PROFILE = "ea8945b0-663c-4fd8-88ef-df15135439fd";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -749,6 +755,7 @@
 			baseConfigurationReference = 59EF906CEF74528769BC7B64 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wentao wu (86L624BTVY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wentao wu (86L624BTVY)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -763,7 +770,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.payease.pushdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d7993817-967c-4b28-8bce-c287bb1969b7";
+				PROVISIONING_PROFILE = "ea8945b0-663c-4fd8-88ef-df15135439fd";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -773,6 +780,7 @@
 			baseConfigurationReference = CEDF88FC3F7757B2DA6063A2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wentao wu (86L624BTVY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wentao wu (86L624BTVY)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -787,7 +795,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.payease.pushdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d7993817-967c-4b28-8bce-c287bb1969b7";
+				PROVISIONING_PROFILE = "ea8945b0-663c-4fd8-88ef-df15135439fd";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

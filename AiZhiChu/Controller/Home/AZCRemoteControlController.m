@@ -25,7 +25,7 @@
 @property(nonatomic, strong) AZCSwitchView *switchView;
 @property(nonatomic, strong) AZCSwitchView *redlightView;
 
-@property(nonatomic, assign) BOOL isFirstConnect;
+@property(nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -38,40 +38,44 @@
     [self sutupPageSubviews];
     
     [BluetoothManager  sharedManager].delegate = self;
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(action) userInfo:nil repeats:YES];
+    if (_firstConnect) {
+        [[BluetoothManager  sharedManager] startScanPeripheral];
+    }
 }
 
-- (void)action {
-    [[BluetoothManager  sharedManager] readNotifyValue];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+   _timer = [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(readData) userInfo:nil repeats:YES];
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [_timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-
 }
+
+- (void)readData {
+    [[BluetoothManager  sharedManager] readNotifyValue];
+}
+
 
 #pragma mark - BluetoothManagerDelegate
 /****************************************************************************/
 /*						        蓝牙操作回调                                  */
 /****************************************************************************/
-- (void)bluetoothChangeState {
+- (void)bluetoothChangeState:(NSInteger)state {
 
 }
 
 - (void)deviceConnectResult:(NSError *)error {
-    if (!error) {
-        
-    }
+    
 }
+
 - (void)deviceDisconnectResult:(NSError *)error {
-    if (!error) {
-        
-    }
+    
 }
 
 - (void)writeDataResult:(NSError *)error {
@@ -109,7 +113,7 @@
 
 #pragma mark - 设备菜单操作
 /****************************************************************************/
-/*						        设备菜单开关                                  */
+/*						       已连接设备菜单开关                              */
 /****************************************************************************/
 - (void)deviceMenuAction:(UIButton *)sender {
     if (!_deviceMenuView) {
@@ -246,21 +250,6 @@
     NSData *data = [NSData dataWithBytes:byte length:7];
     [[BluetoothManager sharedManager] writeData:data];
 }
-
-- (void)readData {
-    
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1 * NSEC_PER_SEC, 0); //每秒执行
-    dispatch_source_set_event_handler(_timer, ^{
-        //在这里执行事件
-        NSLog(@"-----------");
-    });
-    dispatch_resume(_timer);
-    //    dispatch_source_cancel(_timer);
-}
-
 
 #pragma mark - UI页面
 /****************************************************************************/

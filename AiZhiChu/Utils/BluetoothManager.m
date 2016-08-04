@@ -1,3 +1,4 @@
+
 //
 //  BluetoothManager.m
 //  AiZhiChu
@@ -42,12 +43,13 @@ static BluetoothManager *instance = nil;
 
 #pragma mark - CBCentralManagerDelegate
 /****************************************************************************/
-/*								 蓝牙状态                                    */
+/*								 蓝牙状态更新                                 */
 /****************************************************************************/
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    DLog(@"====== 蓝牙状态 ======：%ld", (long)[central state]);
+    DLog(@"====== 蓝牙状态改变 ======：%ld", (long)central.state);
+    _state = central.state;
     if ([self.delegate respondsToSelector:@selector(bluetoothChangeState:)]) {
-        [self.delegate bluetoothChangeState:[central state]];
+        [self.delegate bluetoothChangeState:central.state];
     }
 }
 
@@ -56,10 +58,9 @@ static BluetoothManager *instance = nil;
 /****************************************************************************/
 - (void) centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
     if ([peripheral.name isEqualToString:@"moxibustion"]) {
-        [_bleCentralM stopScan];
-        NSLog(@"====== 发现外设 ======");
-        NSLog(@"%@", peripheral);
+        DLog(@"====== 发现外设 ======：%@", peripheral.name);
         _peripheral = peripheral;
+        [_bleCentralM stopScan];
         [self connectPeripheral];
     }
 }
@@ -68,7 +69,7 @@ static BluetoothManager *instance = nil;
 /*					     	   外设连接结果回调                                */
 /****************************************************************************/
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-    NSLog(@"====== 连接外设成功 ======");
+    DLog(@"====== 连接外设成功 ======");
     _peripheral = peripheral;
     _peripheral.delegate = self;
     [_peripheral discoverServices:nil];
@@ -97,14 +98,13 @@ static BluetoothManager *instance = nil;
 /*								 发现服务                                    */
 /****************************************************************************/
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
-    if (!error) {
-        NSLog(@"====== 发现外设服务成功 ======");
-        for (CBService *ser in peripheral.services) {
-            [_peripheral discoverCharacteristics:nil forService:ser];
-        }
-        
-    } else {
-        NSLog(@"discover service error: %@ ", error);
+    if (error) {
+        DLog(@"===== 搜索服务失败 =====: %@ ", error);
+        return;
+    }
+    DLog(@"====== 搜索服务成功 ======");
+    for (CBService *ser in peripheral.services) {
+        [_peripheral discoverCharacteristics:nil forService:ser];
     }
 }
 
@@ -112,43 +112,35 @@ static BluetoothManager *instance = nil;
 /*								 发现特征                                    */
 /****************************************************************************/
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
-    
-    if (!error) {
-        NSLog(@"====== 发现外设特征 ======");
-        for (CBCharacteristic *characteristic in service.characteristics) {
-            NSLog(@"service:%@", service.UUID.UUIDString);
-            NSLog(@"character:%@", characteristic.UUID.UUIDString);
+    if (error) {
+        DLog(@"===== 搜索服务特征失败 =====: %@ ", error);
+    }
+    for (CBCharacteristic *characteristic in service.characteristics) {
+        if ([characteristic.UUID.UUIDString isEqualToString:@"FFF2"]) {
+            DLog(@"====== 搜索服务写特征成功 ======");
+            _writeCharacteristic = characteristic;
             
-            if ([characteristic.UUID.UUIDString isEqualToString:@"FFF2"]) {
-                _writeCharacteristic = characteristic;
-            } else if ([characteristic.UUID.UUIDString isEqualToString:@"FFF4"]) {
-                _notifyCharacteristc = characteristic;
-                [_peripheral setNotifyValue:YES forCharacteristic:characteristic];
-                
-            }
+        } else if ([characteristic.UUID.UUIDString isEqualToString:@"FFF4"]) {
+            DLog(@"====== 搜索服务读特征成功 ======");
+            _notifyCharacteristc = characteristic;
+            [_peripheral setNotifyValue:YES forCharacteristic:characteristic];
         }
-        
-    } else {
-        NSLog(@"discover characteristic error: %@ ", error);
     }
 }
 
 #pragma mark - CBPeripheralDelegate
 /****************************************************************************/
-/*							接收 notify value 回调                           */
+/*							接收数据、向设备写数据回调                           */
 /****************************************************************************/
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    DLog(@"==== 接收数据据结果回调 ====");
+    DLog(@"===== 接收数据结果回调 =====%@",characteristic.value);
     if ([self.delegate respondsToSelector:@selector(receiveData:error:)]) {
         [self.delegate receiveData:characteristic.value error:error];
     }
 }
 
-/****************************************************************************/
-/*							    写数据结果回调                                */
-/****************************************************************************/
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    DLog(@"==== 写数据结果回调 ====");
+    DLog(@"===== 写数据结果回调 =====");
     if ([self.delegate respondsToSelector:@selector(writeDataResult:)]) {
         [self.delegate writeDataResult:error];
     }
@@ -192,23 +184,19 @@ static BluetoothManager *instance = nil;
 /*							   写数据到外设                                   */
 /****************************************************************************/
 - (void)writeData:(NSData *)data {
-    if (!_writeCharacteristic) {
-        NSLog(@"当前没有匹配的特征值");
+    if (_writeCharacteristic) {
+        [_peripheral writeValue:data forCharacteristic:_writeCharacteristic type:CBCharacteristicWriteWithResponse];
         return;
     }
-    [_peripheral writeValue:data forCharacteristic:_writeCharacteristic type:CBCharacteristicWriteWithResponse];
 }
 
 /****************************************************************************/
 /*							   读外设NotifyValue                             */
 /****************************************************************************/
 - (void)readNotifyValue {
-    if(!_notifyCharacteristc) {
-        DLog(@"==== 蓝牙连接异常，无法读取数据 ====");
-        return;
+    if(_notifyCharacteristc) {
+        [_peripheral setNotifyValue:YES forCharacteristic:_notifyCharacteristc];
     }
-    [_peripheral setNotifyValue:YES forCharacteristic:_notifyCharacteristc];
-    
 }
 
 

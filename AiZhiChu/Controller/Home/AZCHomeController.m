@@ -104,17 +104,25 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (void)redirectToRemoteControl{
-    if ([DeviceManager sharedManager].currentDevice) {
-        AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
-       
+- (void)redirectToRemoteControl {
+    if ([BluetoothManager sharedManager].state == 5) {
+        if ([DeviceManager sharedManager].currentDevice) {
+            AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
+            controller.firstConnect = true;
+            controller.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+            
+        } else {
+            AZCDeviceFirstAddController *controller = [[AZCDeviceFirstAddController alloc] init];
+            controller.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     } else {
-        AZCDeviceFirstAddController *controller = [[AZCDeviceFirstAddController alloc] init];
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
-       
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"蓝牙不可用";
+        [hud hide:YES afterDelay:2];
+        
     }
 }
 

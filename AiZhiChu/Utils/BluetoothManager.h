@@ -24,7 +24,8 @@
 @interface BluetoothManager : NSObject
 
 @property(nonatomic, weak) id<BluetoothManagerDelegate> delegate ;
-@property(nonatomic, assign, getter=isConnect) BOOL Connect;
+@property(nonatomic, assign, getter=isConnect) BOOL connect;
+@property(nonatomic, assign) NSInteger state;
 
 
 + (BluetoothManager *)sharedManager;

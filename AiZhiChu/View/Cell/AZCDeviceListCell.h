@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AZCDeviceCell : UITableViewCell
+@interface AZCDeviceListCell : UITableViewCell
 
 @property(nonatomic, strong) UIImageView *deviceImage;
 @property(nonatomic, strong) UILabel *deviceName;

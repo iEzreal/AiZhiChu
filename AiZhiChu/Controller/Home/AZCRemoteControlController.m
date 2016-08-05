@@ -39,7 +39,7 @@
     
     [BluetoothManager  sharedManager].delegate = self;
     if (_firstConnect) {
-        [[BluetoothManager  sharedManager] startScanPeripheral];
+        [[BluetoothManager sharedManager] startScanPeripheralWithIdentifier:[DeviceManager sharedManager].currentDevice.identifier];
     }
 }
 
@@ -94,16 +94,16 @@
     NSData *responseData = [[NSData alloc] initWithData:data];
     if (responseData.length != 0) {
         Byte *value = (Byte *)[data bytes];
-        _tempView.sliderValue = [Util byte2Int:value[5] - 20];
-        _timeView.sliderValue = [Util byte2Int:value[7]];
+        _tempView.sliderValue = [AZCUtil byte2Int:value[5] - 20];
+        _timeView.sliderValue = [AZCUtil byte2Int:value[7]];
         
-        if ([Util byte2Int:value[3]] == 0x00) {
+        if ([AZCUtil byte2Int:value[3]] == 0x00) {
             _switchView.on = NO;
         } else {
             _switchView.on = YES;
         }
         
-        if ([Util byte2Int:value[4]] == 0x01) {
+        if ([AZCUtil byte2Int:value[4]] == 0x01) {
             _redlightView.on = YES;
         } else {
             _redlightView.on = NO;
@@ -167,26 +167,26 @@
 }
 
 - (void)writeDataWithTime:(int)time {
-    Byte *timeByte = [Util int2Byte:time];
+    Byte *timeByte = [AZCUtil int2Byte:time];
     Byte byte[4];
     byte[0] = 0x01;
     byte[1] = 0x40;
     byte[2] = 0x01;
     byte[3] = timeByte[3];
-    int crcInt = [Util crcCheck:byte length:4];
-    Byte *crcSesult = [Util int2Byte:crcInt];
+    int crcInt = [AZCUtil crcCheck:byte length:4];
+    Byte *crcSesult = [AZCUtil int2Byte:crcInt];
     [self writeDataWithCommand:0x40 parameter:byte[3] crc:crcSesult];
 }
 
 - (void)writeDataWithTemp:(int)temp {
-    Byte *tempByte = [Util int2Byte:(temp + 20)];
+    Byte *tempByte = [AZCUtil int2Byte:(temp + 20)];
     Byte byte[4];
     byte[0] = 0x01;
     byte[1] = 0x30;
     byte[2] = 0x01;
     byte[3] = tempByte[3];
-    int crcInt = [Util crcCheck:byte length:4];
-    Byte *crcSesult = [Util int2Byte:crcInt];
+    int crcInt = [AZCUtil crcCheck:byte length:4];
+    Byte *crcSesult = [AZCUtil int2Byte:crcInt];
     [self writeDataWithCommand:0x30 parameter:byte[3] crc:crcSesult];
     
 }
@@ -202,15 +202,15 @@
         // 0x00：Power off 0x01：Power on
         if (status) {
             Byte crcSrc[] = {0x01, 0x10, 0x01, 0x01};
-            int crcInt = [Util crcCheck:crcSrc length:4];
-            Byte *crcSesult = [Util int2Byte:crcInt];
+            int crcInt = [AZCUtil crcCheck:crcSrc length:4];
+            Byte *crcSesult = [AZCUtil int2Byte:crcInt];
             [self writeDataWithCommand:0x10 parameter:0x01 crc:crcSesult];
             free(crcSesult);
             
         } else {
             Byte crcSrc[] = {0x01, 0x10, 0x01, 0x00};
-            int crcInt = [Util crcCheck:crcSrc length:4];
-            Byte *crcSesult = [Util int2Byte:crcInt];
+            int crcInt = [AZCUtil crcCheck:crcSrc length:4];
+            Byte *crcSesult = [AZCUtil int2Byte:crcInt];
             [self writeDataWithCommand:0x10 parameter:0x00 crc:crcSesult];
         
         }
@@ -220,13 +220,13 @@
     else {
         if (status) {
             Byte crcSrc[] = {0x01, 0x20, 0x01, 0x01};
-            int crcInt = [Util crcCheck:crcSrc length:4];
-            Byte *crcSesult = [Util int2Byte:crcInt];
+            int crcInt = [AZCUtil crcCheck:crcSrc length:4];
+            Byte *crcSesult = [AZCUtil int2Byte:crcInt];
             [self writeDataWithCommand:0x20 parameter:0x01 crc:crcSesult];
         } else {
             Byte crcSrc[] = {0x01, 0x20, 0x01, 0x00};
-            int crcInt = [Util crcCheck:crcSrc length:4];
-            Byte *crcSesult = [Util int2Byte:crcInt];
+            int crcInt = [AZCUtil crcCheck:crcSrc length:4];
+            Byte *crcSesult = [AZCUtil int2Byte:crcInt];
             [self writeDataWithCommand:0x20 parameter:0x00 crc:crcSesult];
         }
         

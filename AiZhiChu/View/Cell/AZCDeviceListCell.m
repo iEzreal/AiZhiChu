@@ -6,15 +6,15 @@
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
 
-#import "AZCDeviceCell.h"
+#import "AZCDeviceListCell.h"
 
-@interface AZCDeviceCell ()
+@interface AZCDeviceListCell ()
 
 @property(nonatomic, strong) UILabel *bluetoothLabel;
 
 @end
 
-@implementation AZCDeviceCell
+@implementation AZCDeviceListCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (!(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {

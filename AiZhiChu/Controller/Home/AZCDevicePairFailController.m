@@ -1,4 +1,6 @@
 //
+//  设备配对失败
+//
 //  AZCDevicePairFailController.m
 //  AiZhiChu
 //

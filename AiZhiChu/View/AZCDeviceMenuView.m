@@ -97,7 +97,7 @@
 - (void)updateDeviceWith:(AZCDevice *)device {
     if (device) {
         _deviceName.text = device.name;
-        _deviceRemarks.text = device.remarks;
+        _deviceRemarks.text = device.remark;
         _deleteDeviceButton.enabled = YES;
         _deviceView.hidden = NO;
         _deleteButton.hidden = NO;

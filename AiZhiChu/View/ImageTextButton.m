@@ -1,9 +1,9 @@
 //
-//  ImageTextButton.m
-//  ButtonMul
+//  ImageTextButton.h
+//  ImageTextButton
 //
-//  Created by Jonren on 15/12/29.
-//  Copyright © 2015年 Jonren. All rights reserved.
+//  Created by Ezreal on 16/6/13.
+//  Copyright © 2016年 Ezreal. All rights reserved.
 //
 
 #import "ImageTextButton.h"

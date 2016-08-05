@@ -1,4 +1,6 @@
 //
+//  第一次添加设备
+//
 //  AZCDeviceAddController.m
 //  AiZhiChu
 //
@@ -17,7 +19,6 @@
 @property(nonatomic, strong) UILabel *hintLabel;
 @property(nonatomic, strong) UIButton *addDeviceButton;
 
-
 @end
 
 @implementation AZCDeviceFirstAddController
@@ -31,6 +32,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)addDeviceClick:(UIButton *)sender {
+    AZCDeviceListController *selectController = [[AZCDeviceListController alloc] init];
+    [self.navigationController pushViewController:selectController animated:YES];
+    
 }
 
 - (void)setupPageSubview {
@@ -92,13 +99,5 @@
         make.top.equalTo(_hintLabel.mas_bottom).offset(80);
     }];
 }
-
-- (void)addDeviceClick:(UIButton *)sender {
-    AZCDeviceListController *selectController = [[AZCDeviceListController alloc] init];
-    [self.navigationController pushViewController:selectController animated:YES];
-
-}
-
-
 
 @end

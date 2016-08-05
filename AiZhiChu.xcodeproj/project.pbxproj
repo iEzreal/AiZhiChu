@@ -11,7 +11,6 @@
 		770D03631D13FBF30054AF7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 770D03621D13FBF30054AF7F /* AppDelegate.m */; };
 		770D036E1D13FBF30054AF7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 770D036C1D13FBF30054AF7F /* LaunchScreen.storyboard */; };
 		770D03791D13FBF40054AF7F /* AiZhiChuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 770D03781D13FBF40054AF7F /* AiZhiChuTests.m */; };
-		7718A2811D1A8CB300D3EB7B /* devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7718A2801D1A8CB300D3EB7B /* devices.plist */; };
 		77405BEE1D17ED66008EDDDF /* AZCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 77405BED1D17ED66008EDDDF /* AZCSlider.m */; };
 		777BE57C1D20B9030082C0B6 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 777BE57B1D20B9030082C0B6 /* DeviceManager.m */; };
 		777BE57F1D20D3D80082C0B6 /* AZCDeviceMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 777BE57E1D20D3D80082C0B6 /* AZCDeviceMenuCell.m */; };
@@ -25,6 +24,7 @@
 		7795F2B81D192A8E00C7C088 /* AZCSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7795F2B71D192A8E00C7C088 /* AZCSwitchView.m */; };
 		77963A501D26A0F800D9F1D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77963A4F1D26A0F800D9F1D6 /* Assets.xcassets */; };
 		77963A551D26BFE200D9F1D6 /* AZCProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77963A541D26BFE200D9F1D6 /* AZCProgressView.m */; };
+		779B725A1D5386B00012B333 /* devices.json in Resources */ = {isa = PBXBuildFile; fileRef = 779B72591D5381350012B333 /* devices.json */; };
 		779BEDEA1D141864007DDF01 /* UIColor+HEX.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDB01D141864007DDF01 /* UIColor+HEX.m */; };
 		779BEDEB1D141864007DDF01 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDB21D141864007DDF01 /* UIImage+Color.m */; };
 		779BEDEC1D141864007DDF01 /* AZCBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDB51D141864007DDF01 /* AZCBaseController.m */; };
@@ -45,7 +45,7 @@
 		779BEDFB1D141864007DDF01 /* AZHShopController.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDD71D141864007DDF01 /* AZHShopController.m */; };
 		779BEDFC1D141864007DDF01 /* AZCIllRegimenPicShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDDC1D141864007DDF01 /* AZCIllRegimenPicShowView.m */; };
 		779BEDFD1D141864007DDF01 /* AZCCommonIllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDDF1D141864007DDF01 /* AZCCommonIllCell.m */; };
-		779BEDFE1D141864007DDF01 /* AZCDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDE11D141864007DDF01 /* AZCDeviceCell.m */; };
+		779BEDFE1D141864007DDF01 /* AZCDeviceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDE11D141864007DDF01 /* AZCDeviceListCell.m */; };
 		779BEDFF1D141864007DDF01 /* AZCHomeBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDE31D141864007DDF01 /* AZCHomeBannerCell.m */; };
 		779BEE001D141864007DDF01 /* AZCHomeMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDE51D141864007DDF01 /* AZCHomeMenuCell.m */; };
 		779BEE011D141864007DDF01 /* CircleBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 779BEDE71D141864007DDF01 /* CircleBannerView.m */; };
@@ -56,7 +56,7 @@
 		77A638BE1D1977CC00B9AFD2 /* AZCDeviceMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A638BD1D1977CC00B9AFD2 /* AZCDeviceMenuView.m */; };
 		77A638C41D19A5D600B9AFD2 /* AZCDeviceFirstAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A638C31D19A5D600B9AFD2 /* AZCDeviceFirstAddController.m */; };
 		77A638C71D19AFFD00B9AFD2 /* AZCDevicePairFailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A638C61D19AFFD00B9AFD2 /* AZCDevicePairFailController.m */; };
-		77EAA3CD1D1F8E4A00BB960F /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EAA3CC1D1F8E4A00BB960F /* Util.m */; };
+		77EAA3CD1D1F8E4A00BB960F /* AZCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EAA3CC1D1F8E4A00BB960F /* AZCUtil.m */; };
 		77EEE5AD1D236D84007608B4 /* AZCDevicePairSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EEE5AC1D236D84007608B4 /* AZCDevicePairSuccessController.m */; };
 		9A68385469853E82D51F1C29 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D4BBB5A1C7B769611DD0E5 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -83,7 +83,6 @@
 		770D03741D13FBF40054AF7F /* AiZhiChuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AiZhiChuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		770D03781D13FBF40054AF7F /* AiZhiChuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AiZhiChuTests.m; sourceTree = "<group>"; };
 		770D037A1D13FBF40054AF7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7718A2801D1A8CB300D3EB7B /* devices.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = devices.plist; sourceTree = "<group>"; };
 		77405BEC1D17ED66008EDDDF /* AZCSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCSlider.h; sourceTree = "<group>"; };
 		77405BED1D17ED66008EDDDF /* AZCSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCSlider.m; sourceTree = "<group>"; };
 		777BE57A1D20B9030082C0B6 /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		77963A4F1D26A0F800D9F1D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77963A531D26BFE200D9F1D6 /* AZCProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCProgressView.h; sourceTree = "<group>"; };
 		77963A541D26BFE200D9F1D6 /* AZCProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCProgressView.m; sourceTree = "<group>"; };
+		779B72591D5381350012B333 /* devices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = devices.json; sourceTree = "<group>"; };
 		779BEDAF1D141864007DDF01 /* UIColor+HEX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HEX.h"; sourceTree = "<group>"; };
 		779BEDB01D141864007DDF01 /* UIColor+HEX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HEX.m"; sourceTree = "<group>"; };
 		779BEDB11D141864007DDF01 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
@@ -144,8 +144,8 @@
 		779BEDDC1D141864007DDF01 /* AZCIllRegimenPicShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCIllRegimenPicShowView.m; sourceTree = "<group>"; };
 		779BEDDE1D141864007DDF01 /* AZCCommonIllCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCCommonIllCell.h; sourceTree = "<group>"; };
 		779BEDDF1D141864007DDF01 /* AZCCommonIllCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCCommonIllCell.m; sourceTree = "<group>"; };
-		779BEDE01D141864007DDF01 /* AZCDeviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCDeviceCell.h; sourceTree = "<group>"; };
-		779BEDE11D141864007DDF01 /* AZCDeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCDeviceCell.m; sourceTree = "<group>"; };
+		779BEDE01D141864007DDF01 /* AZCDeviceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCDeviceListCell.h; sourceTree = "<group>"; };
+		779BEDE11D141864007DDF01 /* AZCDeviceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCDeviceListCell.m; sourceTree = "<group>"; };
 		779BEDE21D141864007DDF01 /* AZCHomeBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCHomeBannerCell.h; sourceTree = "<group>"; };
 		779BEDE31D141864007DDF01 /* AZCHomeBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCHomeBannerCell.m; sourceTree = "<group>"; };
 		779BEDE41D141864007DDF01 /* AZCHomeMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCHomeMenuCell.h; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 		77A638C31D19A5D600B9AFD2 /* AZCDeviceFirstAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCDeviceFirstAddController.m; sourceTree = "<group>"; };
 		77A638C51D19AFFD00B9AFD2 /* AZCDevicePairFailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCDevicePairFailController.h; sourceTree = "<group>"; };
 		77A638C61D19AFFD00B9AFD2 /* AZCDevicePairFailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCDevicePairFailController.m; sourceTree = "<group>"; };
-		77EAA3CB1D1F8E4A00BB960F /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
-		77EAA3CC1D1F8E4A00BB960F /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		77EAA3CB1D1F8E4A00BB960F /* AZCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCUtil.h; sourceTree = "<group>"; };
+		77EAA3CC1D1F8E4A00BB960F /* AZCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCUtil.m; sourceTree = "<group>"; };
 		77EAA3CE1D1FFB1400BB960F /* libMasonry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMasonry.a; path = "Pods/../build/Debug-iphoneos/libMasonry.a"; sourceTree = "<group>"; };
 		77EEE5AB1D236D84007608B4 /* AZCDevicePairSuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCDevicePairSuccessController.h; sourceTree = "<group>"; };
 		77EEE5AC1D236D84007608B4 /* AZCDevicePairSuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCDevicePairSuccessController.m; sourceTree = "<group>"; };
@@ -251,14 +251,14 @@
 		770D035E1D13FBF30054AF7F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7718A2801D1A8CB300D3EB7B /* devices.plist */,
-				770D036C1D13FBF30054AF7F /* LaunchScreen.storyboard */,
-				770D036F1D13FBF30054AF7F /* Info.plist */,
 				779BEE031D1419CA007DDF01 /* AiZhiChuPrefix.pch */,
-				779BEE051D1419CA007DDF01 /* illList.json */,
-				779BEE061D1419CA007DDF01 /* pcupoint.json */,
-				770D035F1D13FBF30054AF7F /* main.m */,
 				779BEE091D141AF0007DDF01 /* AZCMacro.h */,
+				779B72591D5381350012B333 /* devices.json */,
+				779BEE051D1419CA007DDF01 /* illList.json */,
+				770D036F1D13FBF30054AF7F /* Info.plist */,
+				770D036C1D13FBF30054AF7F /* LaunchScreen.storyboard */,
+				770D035F1D13FBF30054AF7F /* main.m */,
+				779BEE061D1419CA007DDF01 /* pcupoint.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -376,8 +376,8 @@
 				77A5336E1D1B82410071276C /* BluetoothManager.m */,
 				777BE57A1D20B9030082C0B6 /* DeviceManager.h */,
 				777BE57B1D20B9030082C0B6 /* DeviceManager.m */,
-				77EAA3CB1D1F8E4A00BB960F /* Util.h */,
-				77EAA3CC1D1F8E4A00BB960F /* Util.m */,
+				77EAA3CB1D1F8E4A00BB960F /* AZCUtil.h */,
+				77EAA3CC1D1F8E4A00BB960F /* AZCUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -411,14 +411,14 @@
 			children = (
 				779BEDDE1D141864007DDF01 /* AZCCommonIllCell.h */,
 				779BEDDF1D141864007DDF01 /* AZCCommonIllCell.m */,
-				779BEDE01D141864007DDF01 /* AZCDeviceCell.h */,
-				779BEDE11D141864007DDF01 /* AZCDeviceCell.m */,
+				779BEDE01D141864007DDF01 /* AZCDeviceListCell.h */,
+				779BEDE11D141864007DDF01 /* AZCDeviceListCell.m */,
+				777BE57D1D20D3D80082C0B6 /* AZCDeviceMenuCell.h */,
+				777BE57E1D20D3D80082C0B6 /* AZCDeviceMenuCell.m */,
 				779BEDE21D141864007DDF01 /* AZCHomeBannerCell.h */,
 				779BEDE31D141864007DDF01 /* AZCHomeBannerCell.m */,
 				779BEDE41D141864007DDF01 /* AZCHomeMenuCell.h */,
 				779BEDE51D141864007DDF01 /* AZCHomeMenuCell.m */,
-				777BE57D1D20D3D80082C0B6 /* AZCDeviceMenuCell.h */,
-				777BE57E1D20D3D80082C0B6 /* AZCDeviceMenuCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -521,7 +521,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7718A2811D1A8CB300D3EB7B /* devices.plist in Resources */,
+				779B725A1D5386B00012B333 /* devices.json in Resources */,
 				770D036E1D13FBF30054AF7F /* LaunchScreen.storyboard in Resources */,
 				779BEE071D1419CA007DDF01 /* illList.json in Resources */,
 				779BEE081D1419CA007DDF01 /* pcupoint.json in Resources */,
@@ -593,7 +593,7 @@
 			files = (
 				779BEDF91D141864007DDF01 /* AZCDeviceListController.m in Sources */,
 				779BEDEC1D141864007DDF01 /* AZCBaseController.m in Sources */,
-				77EAA3CD1D1F8E4A00BB960F /* Util.m in Sources */,
+				77EAA3CD1D1F8E4A00BB960F /* AZCUtil.m in Sources */,
 				770D03631D13FBF30054AF7F /* AppDelegate.m in Sources */,
 				7795F2B51D18FFBB00C7C088 /* AZCControlView.m in Sources */,
 				7791F5111D1EB14C009C47DB /* AZCDevice.m in Sources */,
@@ -603,7 +603,7 @@
 				779BEDF11D141864007DDF01 /* AZCAcupointController.m in Sources */,
 				779BEDEE1D141864007DDF01 /* AZCNavigationController.m in Sources */,
 				77405BEE1D17ED66008EDDDF /* AZCSlider.m in Sources */,
-				779BEDFE1D141864007DDF01 /* AZCDeviceCell.m in Sources */,
+				779BEDFE1D141864007DDF01 /* AZCDeviceListCell.m in Sources */,
 				779BEDFD1D141864007DDF01 /* AZCCommonIllCell.m in Sources */,
 				77A638BE1D1977CC00B9AFD2 /* AZCDeviceMenuView.m in Sources */,
 				77A638C71D19AFFD00B9AFD2 /* AZCDevicePairFailController.m in Sources */,

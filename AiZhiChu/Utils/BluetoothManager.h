@@ -29,7 +29,7 @@
 
 
 + (BluetoothManager *)sharedManager;
-- (void)startScanPeripheral;
+- (void)startScanPeripheralWithIdentifier:(NSString *)identifier;
 - (void)stopScanPeripheral;
 
 - (void)connectPeripheral;

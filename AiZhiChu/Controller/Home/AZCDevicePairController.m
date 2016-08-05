@@ -1,4 +1,6 @@
 //
+//  设备配对
+//
 //  AZCDevicePairController.m
 //  AiZhiChu
 //
@@ -32,7 +34,7 @@
     [BluetoothManager sharedManager].delegate = self;
     
     if ([BluetoothManager sharedManager].state == 5) {
-        [[BluetoothManager sharedManager] startScanPeripheral];
+        [[BluetoothManager sharedManager] startScanPeripheralWithIdentifier:_device.identifier];
     }
 }
 
@@ -51,17 +53,16 @@
 }
 
 - (void)deviceConnectResult:(NSError *)error {
-    if (error) {
+    if (!error) {
+        [DeviceManager sharedManager].currentDevice = _device;
+        AZCDevicePairSuccessController *successController = [[AZCDevicePairSuccessController alloc] init];
+        [self.navigationController pushViewController:successController animated:YES];
+        
+    } else {
         AZCDevicePairFailController *failController = [[AZCDevicePairFailController alloc] init];
         failController.delegate = self;
         [self.navigationController pushViewController:failController animated:YES];
         
-    } else {
-        AZCDevice *device = [[AZCDevice alloc] init];
-        device.name = _deviceName;
-        [DeviceManager sharedManager].currentDevice = device;
-        AZCDevicePairSuccessController *successController = [[AZCDevicePairSuccessController alloc] init];
-        [self.navigationController pushViewController:successController animated:YES];
     }
     [self stopAnimation];
 }
@@ -69,7 +70,7 @@
 #pragma mark - AZCDevicePairFailReconnectDelegate
 - (void)devicePairFailReconnect {
     [self startAnimation];
-    [[BluetoothManager sharedManager] startScanPeripheral];
+    [[BluetoothManager sharedManager] startScanPeripheralWithIdentifier:_device.identifier];
 }
 
 #pragma mark - 进度条动画

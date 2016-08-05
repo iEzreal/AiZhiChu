@@ -82,6 +82,8 @@
     _startButton.layer.masksToBounds = YES;
     _startButton.titleLabel.textColor = [UIColor whiteColor];
     [_startButton setTitle:@"启动" forState:UIControlStateNormal];
+    [_startButton addTarget:self action:@selector(startButtonAction) forControlEvents:UIControlEventTouchUpInside];
+
     [self.view addSubview:_startButton];
 
     

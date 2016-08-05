@@ -8,12 +8,12 @@
 
 #import "AZCDeviceListController.h"
 #import "AZCDevicePairController.h"
-#import "AZCDeviceCell.h"
+#import "AZCDeviceListCell.h"
 
 @interface AZCDeviceListController () <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSArray *deviceArray;
+@property(nonatomic, strong) NSMutableArray *deviceArray;
 
 @end
 
@@ -23,7 +23,7 @@
     [super viewDidLoad];
     self.title = @"我的设备";
     
-    [self loadDeviceList];
+    _deviceArray = [[NSMutableArray alloc] init];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
@@ -32,8 +32,9 @@
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
-        
     }];
+    
+    [self loadDeviceList];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,12 +43,17 @@
 }
 
 - (void)loadDeviceList {
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"devices" ofType:@"plist"];
-    _deviceArray = [NSArray arrayWithContentsOfFile:plistPath];
-    if (!_deviceArray) {
-        _deviceArray = [[NSArray array] init];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"devices" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    for (int i = 0; i < array.count; i++) {
+        AZCDevice *device = [[AZCDevice alloc] initWithDic:array[i]];
+        [_deviceArray addObject:device];
     }
+    
+    [_tableView reloadData];
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _deviceArray.count;
@@ -63,21 +69,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"AZCDeviceCell";
-    AZCDeviceCell *deviceCell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    AZCDeviceListCell *deviceCell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!deviceCell) {
-        deviceCell = [[AZCDeviceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        deviceCell = [[AZCDeviceListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         deviceCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    deviceCell.deviceImage.image = [UIImage imageNamed:[_deviceArray[indexPath.row] objectForKey:@"image"]];
-    deviceCell.deviceName.text = [_deviceArray[indexPath.row] objectForKey:@"name"];
+    AZCDevice *device = _deviceArray[indexPath.row];
+    deviceCell.deviceImage.image = [UIImage imageNamed:device.image];
+    deviceCell.deviceName.text = device.name;
     return deviceCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     AZCDevicePairController *controlller = [[AZCDevicePairController alloc] init];
-    controlller.deviceName = [_deviceArray[indexPath.row] objectForKey:@"name"];
+    controlller.device = _deviceArray[indexPath.row];
     [self.navigationController pushViewController:controlller animated:YES];
 }
 

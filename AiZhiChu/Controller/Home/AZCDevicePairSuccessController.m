@@ -46,7 +46,7 @@
 }
 
 - (void)finishAction:(UIButton *)sender {
-    [DeviceManager sharedManager].currentDevice.remarks = _deviceRemarksTF.text;
+    [DeviceManager sharedManager].currentDevice.remark = _deviceRemarksTF.text;
     AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }

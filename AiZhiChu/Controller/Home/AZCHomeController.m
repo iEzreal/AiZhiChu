@@ -93,6 +93,8 @@
                 
             } else if (index == 2) {
                 [weakself redirectToRemoteControl];
+            } else {
+            
             }
         };
         return menuCell;

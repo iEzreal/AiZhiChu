@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
 
-#import "Util.h"
+#import "AZCUtil.h"
 
-@implementation Util
+@implementation AZCUtil
 
 + (int)byte2Int:(Byte)byte {
     return byte & 0xff;

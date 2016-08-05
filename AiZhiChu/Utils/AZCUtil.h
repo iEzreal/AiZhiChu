@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Util : NSObject
+@interface AZCUtil : NSObject
 
 + (int)byte2Int:(Byte)byte;
 + (Byte *)int2Byte:(int)value;

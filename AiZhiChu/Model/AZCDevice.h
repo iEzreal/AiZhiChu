@@ -11,7 +11,12 @@
 @interface AZCDevice : NSObject <NSCoding>
 
 @property(nonatomic, strong) NSString *name;
-@property(nonatomic, strong) NSString *remarks;
-@property(nonatomic, strong) NSString *imageURL;
+@property(nonatomic, strong) NSString *identifier;
+@property(nonatomic, strong) NSString *image;
+@property(nonatomic, strong) NSString *minTemp;
+@property(nonatomic, strong) NSString *maxTemp;
+@property(nonatomic, strong) NSString *remark;
+
+- (instancetype)initWithDic:(NSDictionary *)dic;
 
 @end

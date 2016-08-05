@@ -12,9 +12,10 @@
 
 @interface BluetoothManager () <CBCentralManagerDelegate, CBPeripheralDelegate>
 
+@property(nonatomic, strong) NSString *identifier; // 外设标识符
+
 @property (nonatomic, strong) CBCentralManager *bleCentralM;
 @property (nonatomic, strong) CBPeripheral *peripheral;
-@property (nonatomic, strong) CBService *service;
 @property (nonatomic, strong) CBCharacteristic *writeCharacteristic;
 @property (nonatomic, strong) CBCharacteristic *notifyCharacteristc;
 
@@ -34,9 +35,9 @@ static BluetoothManager *instance = nil;
 
 - (instancetype)init {
     if (!(self = [super init])) {
-        return self;
+        return nil;
     }
-    
+    _identifier = @"";
     _bleCentralM = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     return self;
 }
@@ -57,7 +58,7 @@ static BluetoothManager *instance = nil;
 /*								 发现外设                                    */
 /****************************************************************************/
 - (void) centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
-    if ([peripheral.name isEqualToString:@"moxibustion"]) {
+    if ([peripheral.name isEqualToString:_identifier]) {
         DLog(@"====== 发现外设 ======：%@", peripheral.name);
         _peripheral = peripheral;
         [_bleCentralM stopScan];
@@ -148,9 +149,10 @@ static BluetoothManager *instance = nil;
 
 #pragma mark - 外部操作方法
 /****************************************************************************/
-/*								 扫描外设                                    */
+/*								 开始、停止扫描外设                            */
 /****************************************************************************/
-- (void)startScanPeripheral {
+- (void)startScanPeripheralWithIdentifier:(NSString *)identifier {
+    _identifier = identifier;
     NSDictionary *scanOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBCentralManagerScanOptionAllowDuplicatesKey];
     [_bleCentralM scanForPeripheralsWithServices:nil options:scanOptions];
 }
@@ -173,6 +175,9 @@ static BluetoothManager *instance = nil;
     }
 }
 
+/****************************************************************************/
+/*							   外设连接状态                                   */
+/****************************************************************************/
 - (BOOL)isConnect {
     if (_peripheral && _peripheral.state == CBPeripheralStateConnected) {
         return true;

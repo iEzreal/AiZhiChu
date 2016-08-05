@@ -1,0 +1,17 @@
+ [
+  {
+  "name": "便携式艾灸仪",
+  "identifier": "moxibustion",
+  "image": "moxa_bianxieshi",
+  "minTemp": "100",
+  "maxTemp": "170"
+  },
+  
+  {
+  "name": "立式艾灸仪",
+  "identifier": "moxibustion2",
+  "image": "moxa_lishi",
+  "minTemp": "100",
+  "maxTemp": "200"
+  }
+]

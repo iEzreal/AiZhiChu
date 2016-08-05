@@ -15,8 +15,8 @@
 
 #import "BluetoothManager.h"
 #import "DeviceManager.h"
-#import "Util.h"
-
+#import "AZCUtil.h"
+#import "AZCDevice.h"
 
 #import "ImageTextButton.h"
 

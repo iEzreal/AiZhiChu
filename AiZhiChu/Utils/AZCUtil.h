@@ -12,7 +12,13 @@
 
 + (int)byte2Int:(Byte)byte;
 + (Byte *)int2Byte:(int)value;
-
 + (int)crcCheck:(Byte *)byte length:(int)length;
+
++ (void)showWithStatus:(NSString *)status;
++ (void)showHintWithStatus:(NSString *)status duration:(NSTimeInterval)duration;
++ (void)showErrorWithStatus:(NSString *)status duration:(NSTimeInterval)duration;
++ (void)showSuccessWithStatus:(NSString *)status duration:(NSTimeInterval)duration;
++ (void)dismissProgressHUD;
+
 
 @end

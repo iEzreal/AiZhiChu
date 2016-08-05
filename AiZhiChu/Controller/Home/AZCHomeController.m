@@ -120,11 +120,7 @@
             [self.navigationController pushViewController:controller animated:YES];
         }
     } else {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"蓝牙不可用";
-        [hud hide:YES afterDelay:2];
-        
+        [AZCUtil showHintWithStatus:@"蓝牙不可用" duration:3];
     }
 }
 

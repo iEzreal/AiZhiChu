@@ -10,11 +10,24 @@
 
 @implementation AZCUtil
 
+/**
+ *  字节转整型
+ *
+ *  @param byte
+ *
+ *  @return
+ */
 + (int)byte2Int:(Byte)byte {
     return byte & 0xff;
 }
 
-// 高位在前，低位在后
+/**
+ *  整型转字节数组 （高位在前，低位在后）
+ *
+ *  @param value
+ *
+ *  @return
+ */
 + (Byte *)int2Byte:(int)value {
     Byte *byte = malloc(4);
     byte[0] = (Byte) ((value >> 24) & 0xFF);
@@ -24,6 +37,14 @@
     return byte ;
 }
 
+/**
+ *  CRC校验
+ *
+ *  @param byte
+ *  @param length
+ *
+ *  @return
+ */
 + (int)crcCheck:(Byte *)byte length:(int)length{
     int wCrc = 0xffff;
     for (int i = 0; i < length; i++) {
@@ -38,7 +59,34 @@
     }
     wCrc = (wCrc << 8) | (wCrc >> 8 & 0xff);
     return wCrc & 0xffff;
-
 }
+
++ (void)showWithStatus:(NSString *)status {
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD showWithStatus:status];
+}
+
++ (void)showHintWithStatus:(NSString *)status duration:(NSTimeInterval)duration {
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setMinimumDismissTimeInterval:duration];
+    [SVProgressHUD showInfoWithStatus:status];
+}
+
++ (void)showErrorWithStatus:(NSString *)status duration:(NSTimeInterval)duration {
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setMinimumDismissTimeInterval:duration];
+    [SVProgressHUD showErrorWithStatus:status];
+}
+
++ (void)showSuccessWithStatus:(NSString *)status duration:(NSTimeInterval)duration {
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setMinimumDismissTimeInterval:duration];
+    [SVProgressHUD showSuccessWithStatus:status];
+}
+
++ (void)dismissProgressHUD {
+    [SVProgressHUD dismiss];
+}
+
 
 @end

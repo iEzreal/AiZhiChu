@@ -39,6 +39,7 @@
     
     [BluetoothManager  sharedManager].delegate = self;
     if (_firstConnect) {
+        [AZCUtil showWithStatus:@"蓝牙连接中..."];
         [[BluetoothManager sharedManager] startScanPeripheralWithIdentifier:[DeviceManager sharedManager].currentDevice.identifier];
     }
 }
@@ -50,6 +51,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [AZCUtil dismissProgressHUD];
     [_timer invalidate];
 }
 
@@ -71,7 +73,11 @@
 }
 
 - (void)deviceConnectResult:(NSError *)error {
-    
+    if (error) {
+        [AZCUtil showErrorWithStatus:@"蓝牙连接失败" duration:3];
+    } else {
+        [AZCUtil showErrorWithStatus:@"蓝牙连接成功" duration:3];
+    }
 }
 
 - (void)deviceDisconnectResult:(NSError *)error {

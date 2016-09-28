@@ -10,13 +10,24 @@
 
 @interface AZCMineController ()
 
+@property(nonatomic, strong) UILabel *label;
+
 @end
 
 @implementation AZCMineController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.leftBarButtonItem = nil;
+    _label = [[UILabel alloc] init];
+    _label.textColor = [UIColor blackColor];
+    _label.font = [UIFont systemFontOfSize:18];
+    _label.text = @"该模块暂未实现";
+    [self.view addSubview:_label];
+    [_label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {

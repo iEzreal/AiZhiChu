@@ -94,7 +94,8 @@
             } else if (index == 2) {
                 [weakself redirectToRemoteControl];
             } else {
-            
+                
+                [AZCUtil showHintWithStatus:@"功能开发中" duration:3];
             }
         };
         return menuCell;

@@ -24,7 +24,7 @@
 @property(nonatomic, strong) UIViewController *superController;
 @property(nonatomic, assign) BOOL isShow;
 
-- (void)updateDeviceWith:(AZCDevice *)device;
+- (void)updateDevice:(AZCDevice *)device;
 - (void)updateDeviceState:(BOOL)state;
 - (void)showWithView:(UIViewController *)superController;
 - (void)dismiss;

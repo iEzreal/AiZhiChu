@@ -10,8 +10,8 @@
 
 @interface AZCUtil : NSObject
 
-+ (int)byte2Int:(Byte)byte;
 + (Byte *)int2Byte:(int)value;
++ (int)byte2Int:(Byte)byte;
 + (int)crcCheck:(Byte *)byte length:(int)length;
 
 + (void)showWithStatus:(NSString *)status;

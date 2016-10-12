@@ -9,9 +9,9 @@
   
   {
   "name": "立式艾灸仪",
-  "identifier": "moxibustion2",
+  "identifier": "moxibustion1",
   "image": "moxa_lishi",
   "minTemp": "100",
-  "maxTemp": "200"
+  "maxTemp": "180"
   }
 ]

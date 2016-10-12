@@ -102,27 +102,21 @@
     }
 }
 
+- (void)redirectToRemoteControl {
+    if ([BluetoothManager sharedManager].state == 5) {
+        AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+            
+    } else {
+        [AZCUtil showHintWithStatus:@"蓝牙不可用" duration:3];
+    }
+}
+
 - (void)redirectWithController:(UIViewController *)controller {
     controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (void)redirectToRemoteControl {
-    if ([BluetoothManager sharedManager].state == 5) {
-        if ([DeviceManager sharedManager].currentDevice) {
-            AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
-            controller.firstConnect = true;
-            controller.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:controller animated:YES];
-            
-        } else {
-            AZCDeviceFirstAddController *controller = [[AZCDeviceFirstAddController alloc] init];
-            controller.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-    } else {
-        [AZCUtil showHintWithStatus:@"蓝牙不可用" duration:3];
-    }
-}
 
 @end

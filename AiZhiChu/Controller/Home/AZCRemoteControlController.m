@@ -5,19 +5,20 @@
 //  Created by Ezreal on 16/6/16.
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
-
+#import "AZCNavigationController.h"
 #import "AZCRemoteControlController.h"
 #import "AZCDeviceListController.h"
 #import "AZCDeviceListController.h"
 
 #import "AZCDeviceMenuView.h"
+#import "AZCNoDeviceView.h"
 #import "AZCControlView.h"
 #import "AZCSwitchView.h"
 
-@interface AZCRemoteControlController () <AZCDeviceMenuViewDelegate, AZCControlViewDelegate, AZCSwitchViewDelegate, BluetoothManagerDelegate>
+@interface AZCRemoteControlController () <AZCDeviceMenuViewDelegate, AZCNoDeviceViewDelegate,AZCControlViewDelegate, AZCSwitchViewDelegate, BluetoothManagerDelegate>
 
-@property(nonatomic, strong)AZCDeviceMenuView *deviceMenuView;
-
+@property(nonatomic, strong) AZCDeviceMenuView *deviceMenuView;
+@property(nonatomic, strong) AZCNoDeviceView *noDeviceView;
 @property(nonatomic, strong) UIView *bgView;
 @property(nonatomic, strong) AZCControlView *timeView;
 @property(nonatomic, strong) AZCControlView *tempView;
@@ -34,24 +35,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"遥控器";
-    
-    [self sutupPageSubviews];
-    
-    [BluetoothManager  sharedManager].delegate = self;
-    if (_firstConnect) {
-        [AZCUtil showWithStatus:@"蓝牙连接中..."];
-        [[BluetoothManager sharedManager] startScanPeripheralWithIdentifier:[DeviceManager sharedManager].currentDevice.identifier];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-   _timer = [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(readData) userInfo:nil repeats:YES];
+    
+    // 是否已有连接过的设备
+    if ([DeviceManager sharedManager].currentDevice) {
+        
+        [self sutupPageSubviews];
+        
+        [BluetoothManager sharedManager].delegate = self;
+        // 已有设备的连接状态
+        if (![[BluetoothManager sharedManager] isConnect]) {
+            [AZCUtil showWithStatus:@"蓝牙连接中..."];
+            [[BluetoothManager sharedManager] startScanPeripheralWithIdentifier:[DeviceManager sharedManager].currentDevice.identifier];
+        }
+    } else {
+        _noDeviceView = [[AZCNoDeviceView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _noDeviceView.delegate = self;
+        [self.view addSubview:_noDeviceView];
+    }
+
+   _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(readData) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [AZCUtil dismissProgressHUD];
     [_timer invalidate];
 }
 
@@ -59,15 +69,20 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)addDeviceAction {
+    AZCDeviceListController *deviceListController = [[AZCDeviceListController alloc] init];
+    [self.navigationController pushViewController:deviceListController animated:YES];
+}
+
 - (void)readData {
     [[BluetoothManager  sharedManager] readNotifyValue];
 }
 
 
-#pragma mark - BluetoothManagerDelegate
 /****************************************************************************/
 /*						        蓝牙操作回调                                  */
 /****************************************************************************/
+#pragma mark - BluetoothManagerDelegate
 - (void)bluetoothChangeState:(NSInteger)state {
 
 }
@@ -76,7 +91,7 @@
     if (error) {
         [AZCUtil showErrorWithStatus:@"蓝牙连接失败" duration:3];
     } else {
-        [AZCUtil showErrorWithStatus:@"蓝牙连接成功" duration:3];
+        [AZCUtil showSuccessWithStatus:@"蓝牙连接成功" duration:3];
     }
 }
 
@@ -131,7 +146,13 @@
         [_deviceMenuView dismiss];
         
     } else {
-        [_deviceMenuView updateDeviceWith:[DeviceManager sharedManager].currentDevice];
+        [_deviceMenuView updateDevice:[DeviceManager sharedManager].currentDevice];
+        if ([BluetoothManager sharedManager].state == 5) {
+            [_deviceMenuView updateDeviceState:YES];
+        } else {
+            [_deviceMenuView updateDeviceState:false];
+        }
+
         [_deviceMenuView showWithView:self];
     }
 }
@@ -158,6 +179,8 @@
 - (void)disconnectDevice {
     [[BluetoothManager sharedManager] disConnectPeripheral];
 }
+
+
 
 #pragma mark - AZCControlViewDelegate
 /****************************************************************************/
@@ -286,8 +309,8 @@
     _tempView = [[AZCControlView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 + 0.5, 64, SCREEN_WIDTH / 2 - 0.5, 400) title:@"温度(℃)"];
     _tempView.backgroundColor = [UIColor colorWithHexString:@"F4F4F4"];
     _tempView.tag = 2;
-    _tempView.minimumValue = 0;
-    _tempView.maximumValue = 170;
+    _tempView.minimumValue = [[DeviceManager sharedManager].currentDevice.minTemp integerValue];
+    _tempView.maximumValue = [[DeviceManager sharedManager].currentDevice.maxTemp integerValue];
     _tempView.sliderValue = 0;
     _tempView.delegate = self;
     [self.view addSubview:_tempView];

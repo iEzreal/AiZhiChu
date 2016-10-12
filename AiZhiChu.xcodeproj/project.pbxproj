@@ -11,6 +11,7 @@
 		770D03631D13FBF30054AF7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 770D03621D13FBF30054AF7F /* AppDelegate.m */; };
 		770D036E1D13FBF30054AF7F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 770D036C1D13FBF30054AF7F /* LaunchScreen.storyboard */; };
 		770D03791D13FBF40054AF7F /* AiZhiChuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 770D03781D13FBF40054AF7F /* AiZhiChuTests.m */; };
+		7730396C1DACD0AF00857988 /* AZCNoDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7730396B1DACD0AF00857988 /* AZCNoDeviceView.m */; };
 		77405BEE1D17ED66008EDDDF /* AZCSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 77405BED1D17ED66008EDDDF /* AZCSlider.m */; };
 		777BE57C1D20B9030082C0B6 /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 777BE57B1D20B9030082C0B6 /* DeviceManager.m */; };
 		777BE57F1D20D3D80082C0B6 /* AZCDeviceMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 777BE57E1D20D3D80082C0B6 /* AZCDeviceMenuCell.m */; };
@@ -83,6 +84,8 @@
 		770D03741D13FBF40054AF7F /* AiZhiChuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AiZhiChuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		770D03781D13FBF40054AF7F /* AiZhiChuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AiZhiChuTests.m; sourceTree = "<group>"; };
 		770D037A1D13FBF40054AF7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7730396A1DACD0AF00857988 /* AZCNoDeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCNoDeviceView.h; sourceTree = "<group>"; };
+		7730396B1DACD0AF00857988 /* AZCNoDeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCNoDeviceView.m; sourceTree = "<group>"; };
 		77405BEC1D17ED66008EDDDF /* AZCSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZCSlider.h; sourceTree = "<group>"; };
 		77405BED1D17ED66008EDDDF /* AZCSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZCSlider.m; sourceTree = "<group>"; };
 		777BE57A1D20B9030082C0B6 /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 				77A638BD1D1977CC00B9AFD2 /* AZCDeviceMenuView.m */,
 				779BEDDB1D141864007DDF01 /* AZCIllRegimenPicShowView.h */,
 				779BEDDC1D141864007DDF01 /* AZCIllRegimenPicShowView.m */,
+				7730396A1DACD0AF00857988 /* AZCNoDeviceView.h */,
+				7730396B1DACD0AF00857988 /* AZCNoDeviceView.m */,
 				77963A531D26BFE200D9F1D6 /* AZCProgressView.h */,
 				77963A541D26BFE200D9F1D6 /* AZCProgressView.m */,
 				77405BEC1D17ED66008EDDDF /* AZCSlider.h */,
@@ -485,6 +490,7 @@
 					770D035A1D13FBF30054AF7F = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 95HDTSE7W5;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -625,6 +631,7 @@
 				7795F2B81D192A8E00C7C088 /* AZCSwitchView.m in Sources */,
 				779BEDFF1D141864007DDF01 /* AZCHomeBannerCell.m in Sources */,
 				779BEDF81D141864007DDF01 /* AZCRemoteControlController.m in Sources */,
+				7730396C1DACD0AF00857988 /* AZCNoDeviceView.m in Sources */,
 				779BEDF51D141864007DDF01 /* AZCDevicePairController.m in Sources */,
 				779BEDFA1D141864007DDF01 /* AZCMineController.m in Sources */,
 				779BEDF31D141864007DDF01 /* AZCCommonIllController.m in Sources */,
@@ -757,17 +764,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wentao wu (86L624BTVY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wentao wu (86L624BTVY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 95HDTSE7W5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/AiZhiChu/AiZhiChuPrefix.pch";
 				INFOPLIST_FILE = AiZhiChu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.payease.pushdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ea8945b0-663c-4fd8-88ef-df15135439fd";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -779,17 +788,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wentao wu (86L624BTVY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wentao wu (86L624BTVY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 95HDTSE7W5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/AiZhiChu/AiZhiChuPrefix.pch";
 				INFOPLIST_FILE = AiZhiChu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.payease.pushdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ea8945b0-663c-4fd8-88ef-df15135439fd";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

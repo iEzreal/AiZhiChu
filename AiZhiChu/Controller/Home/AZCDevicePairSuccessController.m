@@ -6,14 +6,17 @@
 //  Copyright © 2016年 Ezreal. All rights reserved.
 //
 
+#import "AZCDeviceFirstAddController.h"
+#import "AZCDeviceListController.h"
+#import "AZCDevicePairController.h"
+
 #import "AZCDevicePairSuccessController.h"
 #import "AZCRemoteControlController.h"
 
-@interface AZCDevicePairSuccessController () <UITextFieldDelegate>
+@interface AZCDevicePairSuccessController ()
 
 @property(nonatomic, strong) UIImageView *successLogo;
 @property(nonatomic, strong) UIImageView *deviceLogo;
-@property(nonatomic, strong) UITextField *deviceRemarksTF;
 
 @property(nonatomic, strong) UIButton *finishButton;
 
@@ -37,18 +40,15 @@
     [self.view endEditing:YES];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if ([textField.text isEqualToString:@""]) {
-        _finishButton.enabled = NO;
-    } else {
-        _finishButton.enabled = YES;
-    }
-}
-
 - (void)finishAction:(UIButton *)sender {
-    [DeviceManager sharedManager].currentDevice.remark = _deviceRemarksTF.text;
-    AZCRemoteControlController *controller = [[AZCRemoteControlController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+    NSArray *controllers = self.navigationController.viewControllers;
+    
+    for (UIViewController *vc in controllers) {
+        if ([vc isKindOfClass:[AZCRemoteControlController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 - (void)setupPageSubviews {
@@ -60,12 +60,6 @@
     _deviceLogo.image = [UIImage imageNamed:@"device_pair"];
     [self.view addSubview:_deviceLogo];
     
-    _deviceRemarksTF = [[UITextField alloc] init];
-    _deviceRemarksTF.textAlignment = NSTextAlignmentCenter;
-    _deviceRemarksTF.placeholder = @"点击备注设备名字";
-    _deviceRemarksTF.delegate = self;
-    [self.view addSubview:_deviceRemarksTF];
-    
     _finishButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _finishButton.layer.cornerRadius = 20;
     _finishButton.layer.masksToBounds = YES;
@@ -73,7 +67,6 @@
     [_finishButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"DCDCDD"]] forState:UIControlStateHighlighted];
     [_finishButton setTitle:@"完成" forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(finishAction:) forControlEvents:UIControlEventTouchUpInside];
-    _finishButton.enabled = NO;
     [self.view addSubview:_finishButton];
 }
 
@@ -85,11 +78,6 @@
     
     [_deviceLogo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
-    }];
-    
-    [_deviceRemarksTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_deviceLogo.mas_bottom).offset(20);
-        make.centerX.equalTo(self.view);
     }];
     
     [_finishButton mas_makeConstraints:^(MASConstraintMaker *make) {

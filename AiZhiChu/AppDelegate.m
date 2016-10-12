@@ -16,6 +16,11 @@
 
 @implementation AppDelegate
 
+- (void)navConfig {
+    [UINavigationBar appearance].barTintColor = [UIColor colorWithHexString:NavigationBarColor];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor colorWithHexString:NavigationBarTitleColor]};
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -29,12 +34,6 @@
     self.window.rootViewController = [[AZCLaunchController alloc] init];
     [self.window makeKeyAndVisible];
     return YES;
-}
-
-- (void)navConfig {
-    [UINavigationBar appearance].barTintColor = [UIColor colorWithHexString:NavigationBarColor];
-    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
-    [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor colorWithHexString:NavigationBarTitleColor]};
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

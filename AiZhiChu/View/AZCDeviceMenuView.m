@@ -23,7 +23,6 @@
 @property(nonatomic, strong) UIView *deviceView;
 @property(nonatomic, strong) UIImageView *deviceImage;
 @property(nonatomic, strong) UILabel *deviceName;
-@property(nonatomic, strong) UILabel *deviceRemarks;
 @property(nonatomic, strong) UILabel *deviceState;
 @property(nonatomic, strong) UIButton *deleteButton;
 
@@ -87,17 +86,15 @@
 
 - (void)deleteDeviceInfo{
     _deviceName.text = @"";
-    _deviceRemarks.text = @"";
     _deviceState.text = @"";
     _deleteDeviceButton.enabled = NO;
     _deviceView.hidden = YES;
     _deleteButton.hidden = YES;
 }
 
-- (void)updateDeviceWith:(AZCDevice *)device {
+- (void)updateDevice:(AZCDevice *)device {
     if (device) {
         _deviceName.text = device.name;
-        _deviceRemarks.text = device.remark;
         _deleteDeviceButton.enabled = YES;
         _deviceView.hidden = NO;
         _deleteButton.hidden = NO;
@@ -105,7 +102,6 @@
         _deleteDeviceButton.enabled = NO;
         _deviceView.hidden = YES;
         _deleteButton.hidden = YES;
-
     }
 }
 
@@ -182,16 +178,10 @@
     [_deviceView addSubview:_deviceImage];
     
     _deviceName = [[UILabel alloc] init];
-    _deviceName.frame = CGRectMake(CGRectGetMaxX(_deviceImage.frame) + 10, 10, 120, 20);
+    _deviceName.frame = CGRectMake(CGRectGetMaxX(_deviceImage.frame) + 10, 20, 120, 20);
     _deviceName.textColor = [UIColor colorWithHexString:@"4C4C4C"];
     _deviceName.font = [UIFont systemFontOfSize:14];
     [_deviceView addSubview:_deviceName];
-    
-    _deviceRemarks = [[UILabel alloc] init];
-    _deviceRemarks.frame = CGRectMake(CGRectGetMaxX(_deviceImage.frame) + 10, CGRectGetMaxY(_deviceName.frame), 120, 20);
-    _deviceRemarks.textColor = [UIColor colorWithHexString:@"4C4C4C"];
-    _deviceRemarks.font = [UIFont systemFontOfSize:14];
-    [_deviceView addSubview:_deviceRemarks];
     
     _deviceState = [[UILabel alloc] init];
     _deviceState.frame = CGRectMake(_deviceView.frame.size.width - 60, 15, 60, 30);

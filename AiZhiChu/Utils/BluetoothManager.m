@@ -1,4 +1,3 @@
-
 //
 //  BluetoothManager.m
 //  AiZhiChu
@@ -18,6 +17,7 @@
 @property (nonatomic, strong) CBPeripheral *peripheral;
 @property (nonatomic, strong) CBCharacteristic *writeCharacteristic;
 @property (nonatomic, strong) CBCharacteristic *notifyCharacteristc;
+
 
 
 @end

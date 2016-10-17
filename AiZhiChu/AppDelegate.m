@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-
 #import "AZCLaunchController.h"
 
 @interface AppDelegate ()
@@ -23,7 +22,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     [self navConfig];
 
     [BluetoothManager sharedManager];

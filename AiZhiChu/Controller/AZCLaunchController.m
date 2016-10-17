@@ -42,7 +42,7 @@
     [_registerButton setBackgroundImage:[UIImage imageNamed:@"login_selected"] forState:UIControlStateHighlighted];
     [_registerButton setTitleColor:[UIColor colorWithHexString:@"4C4C4C"] forState:UIControlStateNormal];
     [_registerButton setTitleColor:[UIColor colorWithHexString:@"45A2FF"] forState:UIControlStateHighlighted];
-    [_registerButton setTitle:@"进入" forState:UIControlStateNormal];
+    [_registerButton setTitle:@"注册" forState:UIControlStateNormal];
     [_registerButton addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
     _registerButton.tag = 2;
     [self.view addSubview:_registerButton];
@@ -71,9 +71,13 @@
 }
 
 - (void)onClick:(UIButton *)sender {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    delegate.window.rootViewController = [[AZCRootController alloc] init];}
-
+    if (sender.tag == 1) {
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.window.rootViewController = [[AZCRootController alloc] init];
+    } else {
+         [AZCUtil showHintWithStatus:@"功能开发中" duration:1];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

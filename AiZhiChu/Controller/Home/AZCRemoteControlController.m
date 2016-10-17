@@ -26,6 +26,8 @@
 @property(nonatomic, strong) AZCSwitchView *switchView;
 @property(nonatomic, strong) AZCSwitchView *redlightView;
 
+@property(nonatomic, assign) BOOL isRefreshTemp;
+
 @property(nonatomic, strong) NSTimer *timer;
 
 @end
@@ -57,7 +59,7 @@
         [self.view addSubview:_noDeviceView];
     }
 
-   _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(readData) userInfo:nil repeats:YES];
+   _timer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(readData) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -75,7 +77,7 @@
 }
 
 - (void)readData {
-    [[BluetoothManager  sharedManager] readNotifyValue];
+    [[BluetoothManager sharedManager] readNotifyValue];
 }
 
 
@@ -92,6 +94,7 @@
         [AZCUtil showErrorWithStatus:@"蓝牙连接失败" duration:3];
     } else {
         [AZCUtil showSuccessWithStatus:@"蓝牙连接成功" duration:3];
+        [self readData];
     }
 }
 
@@ -115,7 +118,15 @@
     NSData *responseData = [[NSData alloc] initWithData:data];
     if (responseData.length != 0) {
         Byte *value = (Byte *)[data bytes];
-        _tempView.sliderValue = [AZCUtil byte2Int:value[5] - 20];
+        
+        
+        // 保证温度值跟新一次
+        if (!_isRefreshTemp) {
+            _isRefreshTemp = YES;
+            _tempView.sliderValue = [AZCUtil byte2Int:value[5] - 20];
+        }
+        DLog(@"--------: %d", _isRefreshTemp);
+        
         _timeView.sliderValue = [AZCUtil byte2Int:value[7]];
         
         if ([AZCUtil byte2Int:value[3]] == 0x00) {
@@ -169,6 +180,7 @@
     // 删除以前应先断开蓝牙
     [self disconnectDevice];
     [DeviceManager sharedManager].currentDevice = nil;
+    
 
 }
 

@@ -484,13 +484,13 @@
 		770D03531D13FBF30054AF7F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Ezreal;
 				TargetAttributes = {
 					770D035A1D13FBF30054AF7F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 95HDTSE7W5;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = SB6CQJ4SPR;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -685,8 +685,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wentao wu (86L624BTVY)";
@@ -709,9 +711,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "ea8945b0-663c-4fd8-88ef-df15135439fd";
 				SDKROOT = iphoneos;
 			};
@@ -731,8 +733,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wentao wu (86L624BTVY)";
@@ -749,7 +753,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "ea8945b0-663c-4fd8-88ef-df15135439fd";
 				SDKROOT = iphoneos;
@@ -763,20 +767,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wentao wu (86L624BTVY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 95HDTSE7W5;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Puyuan Health Science & Technology co.,Ltd. (SB6CQJ4SPR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Puyuan Health Science & Technology co.,Ltd. (SB6CQJ4SPR)";
+				DEVELOPMENT_TEAM = SB6CQJ4SPR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/AiZhiChu/AiZhiChuPrefix.pch";
 				INFOPLIST_FILE = AiZhiChu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.payease.pushdemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.puyuan.aizhichu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "fce21030-77a1-4601-90fc-ee6363ddbc19";
+				PROVISIONING_PROFILE_SPECIFIER = aizhichu_distribution_pp;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -787,20 +791,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wentao wu (86L624BTVY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 95HDTSE7W5;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Puyuan Health Science & Technology co.,Ltd. (SB6CQJ4SPR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Puyuan Health Science & Technology co.,Ltd. (SB6CQJ4SPR)";
+				DEVELOPMENT_TEAM = SB6CQJ4SPR;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/AiZhiChu/AiZhiChuPrefix.pch";
 				INFOPLIST_FILE = AiZhiChu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.payease.pushdemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.puyuan.aizhichu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "fce21030-77a1-4601-90fc-ee6363ddbc19";
+				PROVISIONING_PROFILE_SPECIFIER = aizhichu_distribution_pp;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
